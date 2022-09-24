@@ -1,0 +1,40 @@
+name: application4
+description: A new Flutter project.
+version: 1.0.0+1
+environment: 
+  sdk: '>=2.12.0 <3.0.0'
+dependencies: 
+  flutter: 
+    sdk: flutter
+  get: ^4.6.5
+  cupertino_icons: ^1.0.5
+  connectivity_plus: ^2.3.6
+  shared_preferences: ^2.0.15
+  cached_network_image: ^3.2.1
+  flutter_svg: ^0.22.0
+  flutter_rating_bar: ^4.0.0
+  modal_progress_hud_nsn: ^0.1.0-nullsafety-1
+  flutter_speed_dial: ^6.0.0
+  fluttertoast: ^8.0.9
+  dropdown_button2: ^1.8.1
+dev_dependencies: 
+  flutter_test: 
+    sdk: flutter
+flutter: 
+  uses-material-design: true
+  assets: 
+    - assets/
+    - assets/images/
+  fonts: 
+    - family: Inknut Antiqua
+      fonts: 
+        - asset: assets/fonts/InknutAntiquaLight.ttf
+          weight: 300
+    - family: Inter
+      fonts: 
+        - asset: assets/fonts/InterRegular.ttf
+          weight: 400
+        - asset: assets/fonts/InterSemiBold.ttf
+          weight: 400
+        - asset: assets/fonts/InterBold.ttf
+          weight: 700
