@@ -158,6 +158,6 @@ class MainNextScreen extends GetWidget<MainNextController> {
   }
 
   onTapBtntf2() {
-    Get.toNamed(AppRoutes.mainTwoScreen);
+    Get.toNamed(AppRoutes.mainScreen);
   }
 }

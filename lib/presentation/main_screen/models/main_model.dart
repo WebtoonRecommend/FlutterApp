@@ -1,1 +1,1 @@
-class MainModel {}
+class MainTwoModel {}

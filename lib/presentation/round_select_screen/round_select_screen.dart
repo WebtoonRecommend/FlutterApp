@@ -110,6 +110,6 @@ class RoundSelectScreen extends GetWidget<RoundSelectController> {
   }
 
   onTapBtnStart() {
-    Get.toNamed(AppRoutes.worldcupScreen);
+    Get.offNamed(AppRoutes.worldcupScreen);
   }
 }

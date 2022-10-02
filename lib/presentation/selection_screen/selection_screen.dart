@@ -106,7 +106,7 @@ class SelectionScreen extends GetWidget<SelectionController> {
   }
 
   onTapBtnRecommend() {
-    Get.toNamed(AppRoutes.mainTwoScreen);
+    Get.toNamed(AppRoutes.mainScreen);
   }
 
   onTapBtnWorldcup(){

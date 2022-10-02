@@ -470,57 +470,6 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                     ]))),
                                         GestureDetector(
                                             onTap: () {
-                                              onTapMainTwo();
-                                            },
-                                            child: Container(
-                                                width:
-                                                    getHorizontalSize(375.00),
-                                                decoration:
-                                                    AppDecoration.fillWhiteA700,
-                                                child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Align(
-                                                          alignment: Alignment
-                                                              .centerLeft,
-                                                          child: Padding(
-                                                              padding:
-                                                                  getPadding(
-                                                                      left: 20,
-                                                                      top: 10,
-                                                                      right: 20,
-                                                                      bottom:
-                                                                          10),
-                                                              child: Text(
-                                                                  "lbl_main_two"
-                                                                      .tr,
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style: AppStyle
-                                                                      .txtRobotoRegular20Black90012
-                                                                      .copyWith()))),
-                                                      Container(
-                                                          height:
-                                                              getVerticalSize(
-                                                                  1.00),
-                                                          width:
-                                                              getHorizontalSize(
-                                                                  375.00),
-                                                          margin:
-                                                              getMargin(top: 5),
-                                                          decoration: BoxDecoration(
-                                                              color: ColorConstant
-                                                                  .bluegray400))
-                                                    ]))),
-                                        GestureDetector(
-                                            onTap: () {
                                               onTapMainnext();
                                             },
                                             child: Container(
@@ -623,7 +572,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                     ]))),
                                         GestureDetector(
                                             onTap: () {
-                                              onTapDetailOne();
+                                              onTapDetail();
                                             },
                                             child: Container(
                                                 width:
@@ -1012,10 +961,6 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
     Get.toNamed(AppRoutes.worldcupScreen);
   }
 
-  onTapMainTwo() {
-    Get.toNamed(AppRoutes.mainTwoScreen);
-  }
-
   onTapMainnext() {
     Get.toNamed(AppRoutes.mainNextScreen);
   }
@@ -1024,8 +969,8 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
     Get.toNamed(AppRoutes.bookmarkScreen);
   }
 
-  onTapDetailOne() {
-    Get.toNamed(AppRoutes.detailoneScreen);
+  onTapDetail() {
+    Get.toNamed(AppRoutes.detailScreen);
   }
 
   onTapDetailTwo() {

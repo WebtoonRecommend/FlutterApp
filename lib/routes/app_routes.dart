@@ -14,14 +14,12 @@ import 'package:application4/presentation/selection_screen/selection_screen.dart
 import 'package:application4/presentation/selection_screen/binding/selection_binding.dart';
 import 'package:application4/presentation/worldcup_screen/worldcup_screen.dart';
 import 'package:application4/presentation/worldcup_screen/binding/worldcup_binding.dart';
-import 'package:application4/presentation/main_two_screen/main_two_screen.dart';
-import 'package:application4/presentation/main_two_screen/binding/main_two_binding.dart';
 import 'package:application4/presentation/main_next_screen/main_next_screen.dart';
 import 'package:application4/presentation/main_next_screen/binding/main_next_binding.dart';
 import 'package:application4/presentation/bookmark_screen/bookmark_screen.dart';
 import 'package:application4/presentation/bookmark_screen/binding/bookmark_binding.dart';
-import 'package:application4/presentation/detailone_screen/detailone_screen.dart';
-import 'package:application4/presentation/detailone_screen/binding/detailone_binding.dart';
+import 'package:application4/presentation/detail_screen/detail_screen.dart';
+import 'package:application4/presentation/detail_screen/binding/detail_binding.dart';
 import 'package:application4/presentation/detailtwo_screen/detailtwo_screen.dart';
 import 'package:application4/presentation/detailtwo_screen/binding/detailtwo_binding.dart';
 import 'package:application4/presentation/detailthree_screen/detailthree_screen.dart';
@@ -55,13 +53,11 @@ class AppRoutes {
 
   static String worldcupScreen = '/worldcup_screen';
 
-  static String mainTwoScreen = '/main_two_screen';
-
   static String mainNextScreen = '/main_next_screen';
 
   static String bookmarkScreen = '/bookmark_screen';
 
-  static String detailoneScreen = '/detailone_screen';
+  static String detailScreen = '/detail_screen';
 
   static String detailtwoScreen = '/detailtwo_screen';
 
@@ -137,13 +133,6 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: mainTwoScreen,
-      page: () => MainTwoScreen(),
-      bindings: [
-        MainTwoBinding(),
-      ],
-    ),
-    GetPage(
       name: mainNextScreen,
       page: () => MainNextScreen(),
       bindings: [
@@ -158,10 +147,10 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: detailoneScreen,
-      page: () => DetailoneScreen(),
+      name: detailScreen,
+      page: () => DetailScreen(),
       bindings: [
-        DetailoneBinding(),
+        DetailBinding(),
       ],
     ),
     GetPage(
