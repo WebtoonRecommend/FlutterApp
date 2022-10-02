@@ -17,6 +17,8 @@ dependencies:
   flutter_speed_dial: ^6.0.0
   fluttertoast: ^8.0.9
   dropdown_button2: ^1.8.1
+  http: any
+  url_launcher: ^6.1.6
 dev_dependencies: 
   flutter_test: 
     sdk: flutter
@@ -25,6 +27,7 @@ flutter:
   assets: 
     - assets/
     - assets/images/
+    - assets/pictures/
   fonts: 
     - family: Inknut Antiqua
       fonts: 
