@@ -3,21 +3,15 @@ import 'package:application4/presentation/app_setting_screen/models/app_setting_
 
 class AppSettingController extends GetxController {
   Rx<AppSettingModel> appSettingModelObj = AppSettingModel().obs;
-  bool valNotify1 = true;
-  bool valNotify2 = false;
-  bool valNotify3 = true;
-  select1(bool value){
-    valNotify1 = value;
-    update();
-  }
-  select2(bool value){
-    valNotify1 = value;
-    update();
-  }
-  select3(bool value){
-    valNotify1 = value;
-    update();
-  }
+
+  RxBool on1 = false.obs; // our observable
+  RxBool on2 = false.obs; // our observable
+  RxBool on3 = false.obs; // our observable
+
+  // swap true/false & save it to observable
+  void toggle1() => on1.value = on1.value ? false : true;
+  void toggle2() => on2.value = on2.value ? false : true;
+  void toggle3() => on3.value = on3.value ? false : true;
   @override
   void onReady() {
     super.onReady();

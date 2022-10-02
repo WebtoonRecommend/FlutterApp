@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 
 import 'controller/app_setting_controller.dart';
 import 'package:application4/core/app_export.dart';
-import 'package:application4/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class AppSettingScreen extends GetWidget<AppSettingController> {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(AppSettingController());
+    AppSettingController controller = Get.put(AppSettingController()); // Instantiate Get Controller, *in* build()
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -49,17 +49,36 @@ class AppSettingScreen extends GetWidget<AppSettingController> {
                 ),
                 Divider(height: 20, thickness: 1,),
                 SizedBox(height: 10,),
-                buildNotificationOption("Theme Dark", controller.valNotify1, controller.select1),
-                buildNotificationOption("Account Active", controller.valNotify2, controller.select2),
-                buildNotificationOption("Oppertunity", controller.valNotify3, controller.select3),
-              ],
+                buildNotificationOption(controller,"Theme Dark", controller.on1, controller.toggle1),
+                buildNotificationOption(controller,"Account Active", controller.on2, controller.toggle2),
+                buildNotificationOption(controller,"Oppertunity", controller.on3, controller.toggle3),
+                // Obx will rebuild Text & Switch when "on" observable changes
+                Center(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      )
+                    ),
+                    onPressed: () {
+                      Get.offAllNamed(AppRoutes.startLoginScreen);
+                    },
+                    child: Text("SIGN OUT", style: TextStyle(
+                      fontSize: 16,
+                      letterSpacing: 2.2,
+                      color: Colors.black
+                    ),),
+                  ),
+                )
+              ]
             )
         ),
       ),
     );
   }
 
-  Padding buildNotificationOption(String title, bool value,
+  Padding buildNotificationOption(AppSettingController controller, String title, RxBool value,
       Function onChangeMethod) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
@@ -71,16 +90,10 @@ class AppSettingScreen extends GetWidget<AppSettingController> {
               fontWeight: FontWeight.w500,
               color: Colors.grey[600]
           ),),
-          Transform.scale(
-            scale: 0.7,
-            child: CupertinoSwitch(
-                activeColor: Colors.blue,
-                trackColor: Colors.grey,
-                value: value,
-                onChanged: (bool newValue) {
-                  onChangeMethod(newValue);
-                }
-            ),
+          Obx(() => Switch(
+              // onChangeMethod() 괄호 꼭 넣기
+              onChanged: (val) => onChangeMethod(),
+              value: value.value),
           )
         ],
       ),
