@@ -11,7 +11,7 @@ void main() {
     DeviceOrientation.portraitUp,
   ]);
   Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
-  debugPaintSizeEnabled = true;
+  debugPaintSizeEnabled = false;
   runApp(MyApp());
 }
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       translations: AppLocalization(),
       locale: Get.deviceLocale, //for setting localization strings
       fallbackLocale: Locale('en', 'US'),
-      title: 'application4',
+      title: 'Webtune',
       initialBinding: InitialBindings(),
       initialRoute: AppRoutes.initialRoute,
       getPages: AppRoutes.pages,
