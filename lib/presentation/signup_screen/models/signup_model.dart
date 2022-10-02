@@ -1,1 +1,3 @@
-class SignupModel {}
+class SignupModel {
+
+}

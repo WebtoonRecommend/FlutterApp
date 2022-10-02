@@ -1,19 +1,20 @@
+import 'package:application4/data/controllers/user_controller.dart';
 import 'package:application4/presentation/signup_screen/controller/signup_controller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../theme/palette.dart';
 import 'package:application4/core/app_export.dart';
-import 'package:application4/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 class SignupScreen extends GetWidget<SignupController> {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignupController());
+    final signupController = Get.put(SignupController());
     final _formKey = GlobalKey<FormState>();
     String userPassword = '';
     String userName = '';
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -23,8 +24,7 @@ class SignupScreen extends GetWidget<SignupController> {
         ),
         backgroundColor: ColorConstant.whiteA700,
         body: Container(
-          margin: getMargin(
-              left: 30, top: 75, right: 30, bottom: 20),
+          margin: getMargin(left: 30, top: 75, right: 30, bottom: 20),
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
@@ -40,7 +40,13 @@ class SignupScreen extends GetWidget<SignupController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Flexible(child: Container(child: Text('Age'),alignment: Alignment.center,),flex: 2,),
+                          Flexible(
+                            child: Container(
+                              child: Text('Age'),
+                              alignment: Alignment.center,
+                            ),
+                            flex: 2,
+                          ),
                           Flexible(
                             flex: 8,
                             child: DropdownButtonFormField2(
@@ -66,20 +72,21 @@ class SignupScreen extends GetWidget<SignupController> {
                               ),
                               iconSize: 30,
                               buttonHeight: 60,
-                              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 20, right: 10),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              items: controller.dropdownListAge
+                              items: signupController.dropdownListAge
                                   .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ))
                                   .toList(),
                               validator: (value) {
                                 if (value == null) {
@@ -88,7 +95,7 @@ class SignupScreen extends GetWidget<SignupController> {
                               },
                               onChanged: (dynamic value) {
                                 //Do something when changing the item if you want.
-                                controller.selectedDropdownAge = value;
+                                signupController.selectedDropdownAge = value;
                               },
                               onSaved: (value) {
                                 // selectedValue = value.toString();
@@ -103,7 +110,13 @@ class SignupScreen extends GetWidget<SignupController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Flexible(child: Container(child: Text('Gender'),alignment: Alignment.center,),flex: 2,),
+                          Flexible(
+                            child: Container(
+                              child: Text('Gender'),
+                              alignment: Alignment.center,
+                            ),
+                            flex: 2,
+                          ),
                           Flexible(
                             flex: 8,
                             child: DropdownButtonFormField2(
@@ -129,20 +142,21 @@ class SignupScreen extends GetWidget<SignupController> {
                               ),
                               iconSize: 30,
                               buttonHeight: 60,
-                              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 20, right: 10),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              items: controller.dropdownListGender
+                              items: signupController.dropdownListGender
                                   .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ))
                                   .toList(),
                               validator: (value) {
                                 if (value == null) {
@@ -151,7 +165,7 @@ class SignupScreen extends GetWidget<SignupController> {
                               },
                               onChanged: (dynamic value) {
                                 //Do something when changing the item if you want.
-                                controller.selectedDropdownGender = value;
+                                signupController.selectedDropdownGender = value;
                               },
                               onSaved: (value) {
                                 // selectedValue = value.toString();
@@ -166,7 +180,13 @@ class SignupScreen extends GetWidget<SignupController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Flexible(child: Container(child: Text('Job'),alignment: Alignment.center,),flex: 2,),
+                          Flexible(
+                            child: Container(
+                              child: Text('Job'),
+                              alignment: Alignment.center,
+                            ),
+                            flex: 2,
+                          ),
                           Flexible(
                             flex: 8,
                             child: DropdownButtonFormField2(
@@ -192,20 +212,21 @@ class SignupScreen extends GetWidget<SignupController> {
                               ),
                               iconSize: 30,
                               buttonHeight: 60,
-                              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 20, right: 10),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              items: controller.dropdownListJob
+                              items: signupController.dropdownListJob
                                   .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ))
                                   .toList(),
                               validator: (value) {
                                 if (value == null) {
@@ -216,16 +237,19 @@ class SignupScreen extends GetWidget<SignupController> {
                                 //Do something when changing the item if you want.
                               },
                               onSaved: (dynamic value) {
-                                controller.selectedDropdownJob = value;
+                                signupController.selectedDropdownJob = value;
                               },
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 30,),
+                    SizedBox(
+                      height: 30,
+                    ),
                     TextButton.icon(
                       onPressed: () {
+                        // TODO: 이메일 인증하기
                         showToast('service not yet supported');
                       },
                       style: TextButton.styleFrom(
@@ -251,9 +275,16 @@ class SignupScreen extends GetWidget<SignupController> {
                                                   * ID 유효성 판단:
                                                   * server user에 존재하는지 판단
                                                   * */
-                                    if (value!.isEmpty ||
-                                        value.length < 4) {
+                                    if (value!.isEmpty || value.length < 4) {
                                       return 'Please enter at least 4 characters';
+                                    } else if (signupController
+                                            .isduplication.value ==
+                                        0) {
+                                      return 'Please check the ID duplication';
+                                    } else if (signupController
+                                            .isduplication.value ==
+                                        1) {
+                                      return 'duplicated ID!';
                                     }
                                     return null;
                                   },
@@ -268,23 +299,17 @@ class SignupScreen extends GetWidget<SignupController> {
                                         Icons.account_circle,
                                         color: Palette.iconColor,
                                       ),
-                                      enabledBorder:
-                                      OutlineInputBorder(
+                                      enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color:
-                                            Palette.textColor1),
-                                        borderRadius:
-                                        BorderRadius.all(
+                                            color: Palette.textColor1),
+                                        borderRadius: BorderRadius.all(
                                           Radius.circular(35.0),
                                         ),
                                       ),
-                                      focusedBorder:
-                                      OutlineInputBorder(
+                                      focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color:
-                                            Palette.textColor1),
-                                        borderRadius:
-                                        BorderRadius.all(
+                                            color: Palette.textColor1),
+                                        borderRadius: BorderRadius.all(
                                           Radius.circular(35.0),
                                         ),
                                       ),
@@ -292,11 +317,41 @@ class SignupScreen extends GetWidget<SignupController> {
                                       hintStyle: TextStyle(
                                           fontSize: 14,
                                           color: Palette.textColor1),
-                                      contentPadding:
-                                      EdgeInsets.all(10)),
+                                      contentPadding: EdgeInsets.all(10)),
                                 ),
                               ),
-                              Flexible(flex:2,child: OutlinedButton( onPressed: () { }, child: Text("중복확인"), ))
+                              Obx(
+                                () => Flexible(
+                                    flex: 2,
+                                    child: OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                          side: BorderSide(
+                                              color: (signupController
+                                                          .isduplication
+                                                          .value ==
+                                                      1)
+                                                  ? Colors.red
+                                                  : (signupController
+                                                              .isduplication
+                                                              .value ==
+                                                          2
+                                                      ? Colors.green
+                                                      : Colors.black),
+                                              width: 3)),
+                                      onPressed: () async {
+                                        //  중복 확인
+                                        if (userName.isEmpty || userName.length < 4) {
+                                          showToast('Please enter at least 4 characters');
+                                        }
+                                        else{
+                                          signupController.userid = userName;
+                                          await signupController.isDuplication();
+                                        }
+                                      },
+                                      child: Text(
+                                          "${signupController.isduplication.value}"),
+                                    )),
+                              )
                             ],
                           ),
                           SizedBox(
@@ -310,8 +365,7 @@ class SignupScreen extends GetWidget<SignupController> {
                                             * passwd 유효성 판단:
                                             * ID와 passwd가 일치하는지 판단
                                             * */
-                              if (value!.isEmpty ||
-                                  value.length < 6) {
+                              if (value!.isEmpty || value.length < 6) {
                                 return 'Password must be at least 7 characters long.';
                               }
                               return null;
@@ -327,32 +381,24 @@ class SignupScreen extends GetWidget<SignupController> {
                                   Icons.lock,
                                   color: Palette.iconColor,
                                 ),
-                                enabledBorder:
-                                OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                      Palette.textColor1),
-                                  borderRadius:
-                                  BorderRadius.all(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Palette.textColor1),
+                                  borderRadius: BorderRadius.all(
                                     Radius.circular(35.0),
                                   ),
                                 ),
-                                focusedBorder:
-                                OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                      Palette.textColor1),
-                                  borderRadius:
-                                  BorderRadius.all(
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Palette.textColor1),
+                                  borderRadius: BorderRadius.all(
                                     Radius.circular(35.0),
                                   ),
                                 ),
                                 hintText: 'password',
                                 hintStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Palette.textColor1),
-                                contentPadding:
-                                EdgeInsets.all(10)),
+                                    fontSize: 14, color: Palette.textColor1),
+                                contentPadding: EdgeInsets.all(10)),
                           ),
                           SizedBox(
                             height: 8,
@@ -365,8 +411,7 @@ class SignupScreen extends GetWidget<SignupController> {
                                             * passwd 유효성 판단:
                                             * ID와 passwd가 일치하는지 판단
                                             * */
-                              if (value!.isEmpty ||
-                                  value.length < 6) {
+                              if (value!.isEmpty || value.length < 6) {
                                 return 'Password must be at least 7 characters long.';
                               }
                               return null;
@@ -382,32 +427,24 @@ class SignupScreen extends GetWidget<SignupController> {
                                   Icons.lock,
                                   color: Palette.iconColor,
                                 ),
-                                enabledBorder:
-                                OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                      Palette.textColor1),
-                                  borderRadius:
-                                  BorderRadius.all(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Palette.textColor1),
+                                  borderRadius: BorderRadius.all(
                                     Radius.circular(35.0),
                                   ),
                                 ),
-                                focusedBorder:
-                                OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                      Palette.textColor1),
-                                  borderRadius:
-                                  BorderRadius.all(
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Palette.textColor1),
+                                  borderRadius: BorderRadius.all(
                                     Radius.circular(35.0),
                                   ),
                                 ),
                                 hintText: 'confirm password',
                                 hintStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: Palette.textColor1),
-                                contentPadding:
-                                EdgeInsets.all(10)),
+                                    fontSize: 14, color: Palette.textColor1),
+                                contentPadding: EdgeInsets.all(10)),
                           ),
                         ],
                       ),
@@ -425,15 +462,33 @@ class SignupScreen extends GetWidget<SignupController> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           TextButton.icon(
-                            onPressed: () {
-                              // if (_formKey.currentState!.validate()) {
-                              //   _formKey.currentState!.save();
-                              //   /*
-                              //   서버로 개인정보 보내는 부분
-                              //   */
-                              //   onTapBtnLogin();
-                              // }
-                              onTapBtnLogin();
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                /*
+                                서버로 개인정보 보내기
+                                */
+                                signupController.userpasswd = userPassword;
+                                bool isusercreated =
+                                    await signupController.postUserData();
+                                if (isusercreated) {
+                                  var userController =
+                                      Get.find<UserController>();
+                                  userController.updateID(userName);
+                                  bool isuserfound =
+                                      await userController.updateUser();
+                                  if (isuserfound) {
+                                    onTapBtnLogin();
+                                  } else {
+                                    showToast("Sorry, user not found.\n"
+                                        "try again.");
+                                  }
+                                } else {
+                                  showToast("Sorry, user can not created.\n"
+                                      "try again.");
+                                }
+                              }
+                              // onTapBtnLogin();
                             },
                             style: TextButton.styleFrom(
                                 foregroundColor: Colors.white,
@@ -458,9 +513,10 @@ class SignupScreen extends GetWidget<SignupController> {
   }
 
   onTapBtnLogin() {
-    Get.toNamed(AppRoutes.selectionScreen);
+    Get.offAllNamed(AppRoutes.selectionScreen);
   }
 }
+
 void showToast(String message) {
   Fluttertoast.showToast(
       msg: message,
