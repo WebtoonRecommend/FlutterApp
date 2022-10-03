@@ -102,7 +102,9 @@ class SelectionScreen extends GetWidget<SelectionController> {
                         )),
                     Expanded(flex: 1,child: SizedBox())
                   ],
-                ))));
+                )
+            )
+        ));
   }
 
   onTapBtnRecommend() {

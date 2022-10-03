@@ -962,7 +962,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
   }
 
   onTapMainnext() {
-    Get.toNamed(AppRoutes.mainNextScreen);
+    Get.toNamed(AppRoutes.keywordcloudScreen);
   }
 
   onTapBookmark() {
@@ -978,7 +978,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
   }
 
   onTapDetailThree() {
-    Get.toNamed(AppRoutes.detailthreeScreen);
+    Get.toNamed(AppRoutes.keywordselectionScreen);
   }
 
   onTapMaingallery() {

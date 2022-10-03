@@ -1,4 +1,3 @@
-import 'package:application4/data/controllers/user_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../data/controllers/heart_controller.dart';
@@ -10,9 +9,11 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 class MainScreen extends GetWidget<MainController> {
   final heartController = Get.put(HeartController(userid: Get.arguments));
   final mainController = Get.put(MainController(userid: Get.arguments));
-  UserController userController = Get.find<UserController>();
+  // final userController = Get.put(UserController());
+
   @override
   Widget build(BuildContext context) {
+    // userController.updateID(Get.arguments);
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -30,6 +31,12 @@ class MainScreen extends GetWidget<MainController> {
             floatingActionButton: SpeedDial(
               animatedIcon: AnimatedIcons.menu_close,
               children: [
+                SpeedDialChild(
+                    child: Icon(Icons.map_outlined),
+                    label: 'navigation',
+                    onTap: () {
+                      onTapBtnnavigation();
+                    }),
                 SpeedDialChild(
                   child: Icon(Icons.person),
                   label: 'My page',
@@ -194,10 +201,6 @@ class MainScreen extends GetWidget<MainController> {
             )));
   }
 
-  onTapBtntf() {
-    Get.toNamed(AppRoutes.mainNextScreen);
-  }
-
   onTapBtntf1() {
     Get.toNamed(AppRoutes.bookmarkScreen);
   }
@@ -208,5 +211,9 @@ class MainScreen extends GetWidget<MainController> {
 
   onTapBtSetting() {
     Get.toNamed(AppRoutes.appSettingScreen);
+  }
+
+  onTapBtnnavigation(){
+    Get.toNamed(AppRoutes.appNavigationScreen);
   }
 }

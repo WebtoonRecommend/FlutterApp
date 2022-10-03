@@ -478,7 +478,7 @@ class SignupScreen extends GetWidget<SignupController> {
                                   bool isuserfound =
                                       await userController.updateUser();
                                   if (isuserfound) {
-                                    onTapBtnLogin();
+                                    Get.offAllNamed(AppRoutes.keywordselectionScreen, arguments: userName);
                                   } else {
                                     showToast("Sorry, user not found.\n"
                                         "try again.");
@@ -512,9 +512,6 @@ class SignupScreen extends GetWidget<SignupController> {
     );
   }
 
-  onTapBtnLogin() {
-    Get.offAllNamed(AppRoutes.selectionScreen);
-  }
 }
 
 void showToast(String message) {

@@ -14,16 +14,16 @@ import 'package:application4/presentation/selection_screen/selection_screen.dart
 import 'package:application4/presentation/selection_screen/binding/selection_binding.dart';
 import 'package:application4/presentation/worldcup_screen/worldcup_screen.dart';
 import 'package:application4/presentation/worldcup_screen/binding/worldcup_binding.dart';
-import 'package:application4/presentation/main_next_screen/main_next_screen.dart';
-import 'package:application4/presentation/main_next_screen/binding/main_next_binding.dart';
+import 'package:application4/presentation/keyword_cloud_screen/keyword_cloud_screen.dart';
+import 'package:application4/presentation/keyword_cloud_screen/binding/keyword_cloud_binding.dart';
 import 'package:application4/presentation/bookmark_screen/bookmark_screen.dart';
 import 'package:application4/presentation/bookmark_screen/binding/bookmark_binding.dart';
 import 'package:application4/presentation/detail_screen/detail_screen.dart';
 import 'package:application4/presentation/detail_screen/binding/detail_binding.dart';
 import 'package:application4/presentation/detailtwo_screen/detailtwo_screen.dart';
 import 'package:application4/presentation/detailtwo_screen/binding/detailtwo_binding.dart';
-import 'package:application4/presentation/detailthree_screen/detailthree_screen.dart';
-import 'package:application4/presentation/detailthree_screen/binding/detailthree_binding.dart';
+import 'package:application4/presentation/keyword_selection_screen/keyword_selection_screen.dart';
+import 'package:application4/presentation/keyword_selection_screen/binding/keyword_selection_binding.dart';
 import 'package:application4/presentation/main_gallery_screen/main_gallery_screen.dart';
 import 'package:application4/presentation/main_gallery_screen/binding/main_gallery_binding.dart';
 import 'package:application4/presentation/main_screen/main_screen.dart';
@@ -53,7 +53,7 @@ class AppRoutes {
 
   static String worldcupScreen = '/worldcup_screen';
 
-  static String mainNextScreen = '/main_next_screen';
+  static String keywordcloudScreen = '/keyword_cloud_screen';
 
   static String bookmarkScreen = '/bookmark_screen';
 
@@ -61,7 +61,7 @@ class AppRoutes {
 
   static String detailtwoScreen = '/detailtwo_screen';
 
-  static String detailthreeScreen = '/detailthree_screen';
+  static String keywordselectionScreen = '/keyword_selection_screen';
 
   static String mainGalleryScreen = '/main_gallery_screen';
 
@@ -133,10 +133,10 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: mainNextScreen,
-      page: () => MainNextScreen(),
+      name: keywordcloudScreen,
+      page: () => KeywordCloudScreen(),
       bindings: [
-        MainNextBinding(),
+        KeywordCloudBinding(),
       ],
     ),
     GetPage(
@@ -161,10 +161,10 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: detailthreeScreen,
-      page: () => DetailthreeScreen(),
+      name: keywordselectionScreen,
+      page: () => KeywordSelectionScreen(),
       bindings: [
-        DetailthreeBinding(),
+        KeywordSelectionBinding(),
       ],
     ),
     GetPage(

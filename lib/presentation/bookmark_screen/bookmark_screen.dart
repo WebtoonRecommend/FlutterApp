@@ -81,12 +81,4 @@ class BookmarkScreen extends GetWidget<BookmarkController> {
   onTapTxttf() {
     Get.toNamed(AppRoutes.detailScreen);
   }
-
-  onTapTxttf1() {
-    Get.toNamed(AppRoutes.detailtwoScreen);
-  }
-
-  onTapTxttf2() {
-    Get.toNamed(AppRoutes.detailthreeScreen);
-  }
 }
