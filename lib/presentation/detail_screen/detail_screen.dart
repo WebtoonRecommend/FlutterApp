@@ -216,24 +216,15 @@ class DetailScreen extends GetWidget<DetailController> {
                                 left: 56,
                                 bottom: 7,
                               ),
-                              child: RatingBar.builder(
-                                initialRating: double.parse(webtoon.webtoonStarRating),
-                                minRating: 0,
-                                direction: Axis.horizontal,
-                                allowHalfRating: false,
-                                itemSize: getVerticalSize(
-                                  35.00,
+                              child: RatingBarIndicator(
+                                rating: double.parse(webtoon.webtoonStarRating),
+                                itemBuilder: (context, index) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
                                 ),
-                                unratedColor: ColorConstant.bluegray100,
                                 itemCount: 5,
-                                updateOnDrag: true,
-                                onRatingUpdate: (rating) {},
-                                itemBuilder: (context, _) {
-                                  return Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  );
-                                },
+                                itemSize: 30.0,
+                                direction: Axis.horizontal,
                               ),
                             ),
                           ],
