@@ -64,102 +64,105 @@ class MainScreen extends GetWidget<MainController> {
                         child: ListView.builder(
                             itemCount: mainController.webtoonList.length,
                             itemBuilder: (context, index) {
-                              return Card(
-                                margin: EdgeInsets.all(12),
-                                child: Padding(
-                                  padding: EdgeInsets.all(16),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Flexible(
-                                            flex: 5,
-                                            child: Image.asset(
-                                              'assets${mainController.webtoonList[index].webtoonImagelink.substring(12)}',
-                                              fit: BoxFit.contain,
+                              return Offstage(
+                                offstage: heartController.hearts.contains(mainController.webtoonList[index].webtoonName),
+                                child: Card(
+                                  margin: EdgeInsets.all(12),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Flexible(
+                                              flex: 5,
+                                              child: Image.asset(
+                                                'assets${mainController.webtoonList[index].webtoonImagelink.substring(12)}',
+                                                fit: BoxFit.contain,
+                                              ),
+                                              // Image.network(
+                                              //     webtoonController.productList[index].imageLink,
+                                              //   fit: BoxFit.fill
+                                              // ),
                                             ),
-                                            // Image.network(
-                                            //     webtoonController.productList[index].imageLink,
-                                            //   fit: BoxFit.fill
-                                            // ),
-                                          ),
-                                          Flexible(
-                                            flex: 6,
-                                            child: Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 5),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      FittedBox(
-                                                        fit: BoxFit.fitWidth,
-                                                        child: Text(
-                                                          '${mainController.webtoonList[index].webtoonName}',
-                                                          style: TextStyle(fontSize: 24),
+                                            Flexible(
+                                              flex: 6,
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        FittedBox(
+                                                          fit: BoxFit.fitWidth,
+                                                          child: Text(
+                                                            '${mainController.webtoonList[index].webtoonName}',
+                                                            style: TextStyle(fontSize: 24),
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Text(
-                                                          '${mainController.webtoonList[index].webtoonist}'),
-                                                      RatingBarIndicator(
-                                                        rating: double.parse(mainController.webtoonList[index].webtoonStarRating),
-                                                        itemBuilder: (context, index) => Icon(
-                                                          Icons.star,
-                                                          color: Colors.amber,
+                                                        Text(
+                                                            '${mainController.webtoonList[index].webtoonist}'),
+                                                        RatingBarIndicator(
+                                                          rating: double.parse(mainController.webtoonList[index].webtoonStarRating),
+                                                          itemBuilder: (context, index) => Icon(
+                                                            Icons.star,
+                                                            color: Colors.amber,
+                                                          ),
+                                                          itemCount: 5,
+                                                          itemSize: 20.0,
+                                                          direction: Axis.horizontal,
                                                         ),
-                                                        itemCount: 5,
-                                                        itemSize: 20.0,
-                                                        direction: Axis.horizontal,
-                                                      ),
-                                                      Text(
-                                                          '${mainController.webtoonList[index].webtoonDescription.replaceAll('\n', ' ').substring(0,20)}'+"..."),
-                                                      // Text(
-                                                      //     '${heartController.hearts}'),
-                                                    ],
-                                                  ),
+                                                        Text(
+                                                            '${mainController.webtoonList[index].webtoonDescription.replaceAll('\n', ' ').substring(0,20)}'+"..."),
+                                                        // Text(
+                                                        //     '${heartController.hearts}'),
+                                                      ],
+                                                    ),
 
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      IconButton(
-                                                        onPressed: () {
-                                                          print("${size.width},${size.height}");
-                                                          var heartList = heartController.hearts;
-                                                          if (heartList.contains(
-                                                              mainController.webtoonList[index].webtoonName)) {
-                                                            heartController.breakHeartToWebtoon(
-                                                                mainController.webtoonList[index].webtoonName);
-                                                          } else {
-                                                            heartController.heartToWebtoon(
-                                                                mainController.webtoonList[index].webtoonName);
-                                                          }
-                                                        },
-                                                        icon: Icon(heartController.hearts.any((webtoonTitle) => webtoonTitle == mainController.webtoonList[index].webtoonName)
-                                                            ? Icons.favorite
-                                                            : Icons.favorite_border),
-                                                      ),
-                                                      ElevatedButton(
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        IconButton(
                                                           onPressed: () {
-                                                            Get.toNamed(AppRoutes.detailScreen, arguments: mainController.webtoonList[index]);
-                                                          }, child: Text("상세보기"))
-                                                    ],
-                                                  )
-                                                ],
+                                                            print("${size.width},${size.height}");
+                                                            var heartList = heartController.hearts;
+                                                            if (heartList.contains(
+                                                                mainController.webtoonList[index].webtoonName)) {
+                                                              heartController.breakHeartToWebtoon(
+                                                                  mainController.webtoonList[index].webtoonName);
+                                                            } else {
+                                                              heartController.heartToWebtoon(
+                                                                  mainController.webtoonList[index].webtoonName);
+                                                            }
+                                                          },
+                                                          icon: Icon(heartController.hearts.any((webtoonTitle) => webtoonTitle == mainController.webtoonList[index].webtoonName)
+                                                              ? Icons.favorite
+                                                              : Icons.favorite_border),
+                                                        ),
+                                                        ElevatedButton(
+                                                            onPressed: () {
+                                                              Get.toNamed(AppRoutes.detailScreen, arguments: mainController.webtoonList[index]);
+                                                            }, child: Text("상세보기"))
+                                                      ],
+                                                    )
+                                                  ],
 
+                                                ),
                                               ),
                                             ),
-                                          ),
 
-                                        ],
-                                      ),
+                                          ],
+                                        ),
 
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
