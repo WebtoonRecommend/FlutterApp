@@ -293,6 +293,7 @@ class SignupScreen extends GetWidget<SignupController> {
                                   },
                                   onChanged: (value) {
                                     userName = value;
+                                    signupController.isduplication.value = 0;
                                   },
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(
@@ -411,16 +412,14 @@ class SignupScreen extends GetWidget<SignupController> {
                                             * passwd 유효성 판단:
                                             * ID와 passwd가 일치하는지 판단
                                             * */
-                              if (value!.isEmpty || value.length < 6) {
-                                return 'Password must be at least 7 characters long.';
+                              if (value != userPassword) {
+                                return 'Please confirm password.';
                               }
                               return null;
                             },
                             onSaved: (value) {
-                              userPassword = value!;
                             },
                             onChanged: (value) {
-                              userPassword = value;
                             },
                             decoration: InputDecoration(
                                 prefixIcon: Icon(
