@@ -38,7 +38,9 @@ class SignupController extends GetxController {
   }
 
   isDuplication() async {
-    var data = {};
+    var data = {
+      "PassWd": "0"
+    };
     var body = json.encode(data);
     var response = await http.Client().post(
         Uri.parse("http://3.39.22.234/User/${this.userid}"),
