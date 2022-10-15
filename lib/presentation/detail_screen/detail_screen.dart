@@ -131,14 +131,15 @@ class DetailScreen extends GetWidget<DetailController> {
                               35.00,
                             ),
                           ),
-                          child: CommonImageView(
-                            imagePath: 'assets${webtoon.webtoonImagelink.substring(12)}',
+                          child: Image.network(
+                            webtoon.webtoonThumbnail,
                             height: getVerticalSize(
                               245.00,
                             ),
                             width: getHorizontalSize(
                               333.00,
                             ),
+                            fit: BoxFit.fill
                           ),
                         ),
                       ),
@@ -217,7 +218,7 @@ class DetailScreen extends GetWidget<DetailController> {
                                 bottom: 7,
                               ),
                               child: RatingBarIndicator(
-                                rating: double.parse(webtoon.webtoonStarRating),
+                                rating: double.parse(webtoon.webtoonStarRating)/2,
                                 itemBuilder: (context, index) => Icon(
                                   Icons.star,
                                   color: Colors.amber,
@@ -268,7 +269,7 @@ class DetailScreen extends GetWidget<DetailController> {
                     ),
                     CustomButton(
                       onTap: (){
-                        final Uri _url = Uri.parse('https://comic.naver.com/webtoon/weekday');
+                        final Uri _url = Uri.parse('https://comic.naver.com${webtoon.webtoonLink}');
                         _launchUrl(_url);
                       },
                       width: 194,

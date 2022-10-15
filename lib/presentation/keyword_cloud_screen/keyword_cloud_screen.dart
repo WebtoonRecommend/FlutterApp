@@ -60,7 +60,7 @@ class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
                           ),
                           Obx(()=>Offstage(
                               // obx 함수가 Rx variable in the root scope of the callback의 변화만 탐지하기 때문에 새로 만들어줌
-                              offstage: false,
+                              offstage: true,
                               child: SingleChildScrollView(
                                 child: Container(
                                   width: size.width,

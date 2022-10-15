@@ -63,13 +63,19 @@ class MainController extends GetxController {
       var myJson = jsonDecode(jsonData);
 
       var webtoonData = Webtoon(
-          webtoonName: myJson["Title"],
-          webtoonDescription: myJson["Summary"],
-          webtoonImagelink: myJson["ThumbNail"],
-          webtoonStarRating: "4",
-          webtoonist: myJson["Author"]
+        webtoonName: myJson["이름"],
+        webtoonist: myJson["작가"],
+        webtoonDescription: myJson["설명"],
+        webtoonGenre: myJson["장르"],
+        webtoonAge: myJson["이용가"],
+        webtoonEpisode: myJson["회차"],
+        webtoonEnd: myJson["완결"],
+        webtoonFlatform: myJson["플랫폼"],
+        webtoonLink: myJson["링크"],
+        webtoonThumbnail: myJson["썸네일"],
+        webtoonImagelink: myJson["이미지링크"],
+        webtoonStarRating: myJson["별점"],
       );
-      print(myJson["Author"]);
       print(webtoonList);
       return webtoonData;
     }

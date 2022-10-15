@@ -87,14 +87,14 @@ class MainScreen extends GetWidget<MainController> {
                                           children: [
                                             Flexible(
                                               flex: 5,
-                                              child: Image.asset(
-                                                'assets${mainController.webtoonList[index].webtoonImagelink.substring(12)}',
-                                                fit: BoxFit.contain,
-                                              ),
-                                              // Image.network(
-                                              //     webtoonController.productList[index].imageLink,
-                                              //   fit: BoxFit.fill
+                                              // child: Image.asset(
+                                              //   'assets${mainController.webtoonList[index].webtoonImagelink.substring(12)}',
+                                              //   fit: BoxFit.contain,
                                               // ),
+                                              child: Image.network(
+                                                  mainController.webtoonList[index].webtoonImagelink,
+                                                // fit: BoxFit.fill
+                                              ),
                                             ),
                                             Flexible(
                                               flex: 6,
@@ -117,7 +117,7 @@ class MainScreen extends GetWidget<MainController> {
                                                         Text(
                                                             '${mainController.webtoonList[index].webtoonist}'),
                                                         RatingBarIndicator(
-                                                          rating: double.parse(mainController.webtoonList[index].webtoonStarRating),
+                                                          rating: double.parse(mainController.webtoonList[index].webtoonStarRating)/2,
                                                           itemBuilder: (context, index) => Icon(
                                                             Icons.star,
                                                             color: Colors.amber,
