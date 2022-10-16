@@ -3,7 +3,6 @@ import '/core/app_export.dart';
 import 'package:application4/presentation/main_screen/models/main_model.dart';
 import 'package:http/http.dart' as http;
 import '../../../data/models/recommend.dart';
-import 'dart:convert';
 
 class MainController extends GetxController {
   Rx<MainTwoModel> mainTwoModelObj = MainTwoModel().obs;
@@ -60,22 +59,8 @@ class MainController extends GetxController {
 
     if(response.statusCode == 200){
       var jsonData = response.body;
-      var myJson = jsonDecode(jsonData);
 
-      var webtoonData = Webtoon(
-        webtoonName: myJson["이름"],
-        webtoonist: myJson["작가"],
-        webtoonDescription: myJson["설명"],
-        webtoonGenre: myJson["장르"],
-        webtoonAge: myJson["이용가"],
-        webtoonEpisode: myJson["회차"],
-        webtoonEnd: myJson["완결"],
-        webtoonFlatform: myJson["플랫폼"],
-        webtoonLink: myJson["링크"],
-        webtoonThumbnail: myJson["썸네일"],
-        webtoonImagelink: myJson["이미지링크"],
-        webtoonStarRating: myJson["별점"],
-      );
+      var webtoonData = webtoonFromJson(jsonData);
       print(webtoonList);
       return webtoonData;
     }
