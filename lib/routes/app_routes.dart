@@ -30,8 +30,8 @@ import 'package:application4/presentation/main_screen/main_screen.dart';
 import 'package:application4/presentation/main_screen/binding/main_binding.dart';
 import 'package:application4/presentation/main_card_screen/main_card_screen.dart';
 import 'package:application4/presentation/main_card_screen/binding/main_card_binding.dart';
-import 'package:application4/presentation/two_screen/two_screen.dart';
-import 'package:application4/presentation/two_screen/binding/two_binding.dart';
+import 'package:application4/presentation/search_screen/search_screen.dart';
+import 'package:application4/presentation/search_screen/binding/search_binding.dart';
 import 'package:application4/presentation/app_navigation_screen/app_navigation_screen.dart';
 import 'package:application4/presentation/app_navigation_screen/binding/app_navigation_binding.dart';
 import 'package:get/get.dart';
@@ -69,7 +69,7 @@ class AppRoutes {
 
   static String mainCardScreen = '/main_card_screen';
 
-  static String twoScreen = '/two_screen';
+  static String searchScreen = '/search_screen';
 
   static String appNavigationScreen = '/app_navigation_screen';
 
@@ -189,10 +189,10 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: twoScreen,
-      page: () => TwoScreen(),
+      name: searchScreen,
+      page: () => SearchScreen(),
       bindings: [
-        TwoBinding(),
+        SearchBinding(),
       ],
     ),
     GetPage(

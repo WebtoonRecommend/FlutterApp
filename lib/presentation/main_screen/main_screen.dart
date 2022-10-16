@@ -21,9 +21,9 @@ class MainScreen extends GetWidget<MainController> {
               centerTitle: true,
               actions: [
                 IconButton(
-                  icon: Icon(Icons.settings),
+                  icon: Icon(Icons.search),
                   onPressed: () {
-                    onTapBtSetting();
+                    onTapBtnSearch();
                   },
                 )
               ],
@@ -31,6 +31,13 @@ class MainScreen extends GetWidget<MainController> {
             floatingActionButton: SpeedDial(
               animatedIcon: AnimatedIcons.menu_close,
               children: [
+                SpeedDialChild(
+                  child: Icon(Icons.settings),
+                  label: 'Setting',
+                  onTap: (){
+                    onTapBtSetting();
+                  }
+                ),
                 SpeedDialChild(
                     child: Icon(Icons.map_outlined),
                     label: 'navigation',
@@ -45,7 +52,7 @@ class MainScreen extends GetWidget<MainController> {
                     child: Icon(Icons.star_border),
                     label: 'bookmark',
                     onTap: () {
-                      onTapBtntf1();
+                      onTapBtnBookmark();
                     }),
                 // SpeedDialChild(
                 //     child: Icon(Icons.account_tree),
@@ -87,17 +94,27 @@ class MainScreen extends GetWidget<MainController> {
                                           children: [
                                             Flexible(
                                               flex: 5,
+                                              fit: FlexFit.tight,
                                               // child: Image.asset(
                                               //   'assets${mainController.webtoonList[index].webtoonImagelink.substring(12)}',
                                               //   fit: BoxFit.contain,
                                               // ),
-                                              child: Image.network(
-                                                  mainController.webtoonList[index].webtoonImagelink,
-                                                // fit: BoxFit.fill
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(
+                                                  getHorizontalSize(
+                                                    5.00,
+                                                  ),
+                                                ),
+                                                child: Image.network(
+                                                    mainController.webtoonList[index].webtoonImagelink,
+                                                  fit: BoxFit.fill
+                                                ),
                                               ),
                                             ),
+                                            Expanded(flex: 1, child: SizedBox(),),
                                             Flexible(
                                               flex: 6,
+                                              fit: FlexFit.tight,
                                               child: Padding(
                                                 padding: const EdgeInsets.symmetric(horizontal: 5),
                                                 child: Column(
@@ -200,8 +217,11 @@ class MainScreen extends GetWidget<MainController> {
                 )
             )));
   }
+  onTapBtnSearch(){
+    Get.toNamed(AppRoutes.searchScreen);
+  }
 
-  onTapBtntf1() {
+  onTapBtnBookmark() {
     Get.toNamed(AppRoutes.bookmarkScreen);
   }
 

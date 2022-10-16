@@ -28,7 +28,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                         top: 10,
                                         right: 20,
                                         bottom: 10),
-                                    child: Text("lbl_app_navigation".tr,
+                                    child: Text("app_navigation".tr,
                                         overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.center,
                                         style: AppStyle.txtRobotoRegular20
@@ -87,7 +87,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_start_login"
+                                                                  "start_login"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -138,7 +138,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_find_idpw"
+                                                                  "find_idpw"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -189,7 +189,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_app_setting"
+                                                                  "app_setting"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -240,7 +240,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_signup"
+                                                                  "signup"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -342,7 +342,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_round_select"
+                                                                  "round_select"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -393,7 +393,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_selection"
+                                                                  "selection"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -444,7 +444,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_worldcup"
+                                                                  "worldcup"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -470,7 +470,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                     ]))),
                                         GestureDetector(
                                             onTap: () {
-                                              onTapMainnext();
+                                              onTapKeywordCloud();
                                             },
                                             child: Container(
                                                 width:
@@ -495,7 +495,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_main_next"
+                                                                  "keyword cloud"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -546,7 +546,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_bookmark"
+                                                                  "bookmark"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -597,7 +597,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_detailone"
+                                                                  "detail"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -674,7 +674,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                     ]))),
                                         GestureDetector(
                                             onTap: () {
-                                              onTapDetailThree();
+                                              onTapKeywordSelection();
                                             },
                                             child: Container(
                                                 width:
@@ -699,7 +699,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_detailthree"
+                                                                  "keyword selection"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -801,7 +801,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_main".tr,
+                                                                  "main".tr,
                                                                   overflow:
                                                                       TextOverflow
                                                                           .ellipsis,
@@ -851,7 +851,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_main_card"
+                                                                  "main_card"
                                                                       .tr,
                                                                   overflow:
                                                                       TextOverflow
@@ -877,7 +877,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                     ]))),
                                         GestureDetector(
                                             onTap: () {
-                                              onTapTwo();
+                                              onTapSearch();
                                             },
                                             child: Container(
                                                 width:
@@ -902,7 +902,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                                                                       bottom:
                                                                           10),
                                                               child: Text(
-                                                                  "lbl_two".tr,
+                                                                  "search".tr,
                                                                   overflow:
                                                                       TextOverflow
                                                                           .ellipsis,
@@ -961,7 +961,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
     Get.toNamed(AppRoutes.worldcupScreen);
   }
 
-  onTapMainnext() {
+  onTapKeywordCloud() {
     Get.toNamed(AppRoutes.keywordcloudScreen);
   }
 
@@ -977,7 +977,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
     Get.toNamed(AppRoutes.detailtwoScreen);
   }
 
-  onTapDetailThree() {
+  onTapKeywordSelection() {
     Get.toNamed(AppRoutes.keywordselectionScreen);
   }
 
@@ -993,7 +993,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
     Get.toNamed(AppRoutes.mainCardScreen);
   }
 
-  onTapTwo() {
-    Get.toNamed(AppRoutes.twoScreen);
+  onTapSearch() {
+    Get.toNamed(AppRoutes.searchScreen);
   }
 }
