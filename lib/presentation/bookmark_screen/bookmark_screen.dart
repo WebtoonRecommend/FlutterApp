@@ -25,9 +25,11 @@ class BookmarkScreen extends GetWidget<BookmarkController> {
                   child: Obx(() => Container(
                       width: size.width,
                       height: size.height,
+                      padding: EdgeInsets.only(bottom: 50.0),
                       child: ListView.builder(
                           itemCount: heartController.hearts.length,
                           itemBuilder: (context, index) {
+                            index = heartController.hearts.length - index-1;
                             return Container(
                               child: Column(
                                 children: [
