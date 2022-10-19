@@ -38,16 +38,16 @@ class MainScreen extends GetWidget<MainController> {
                     onTapBtSetting();
                   }
                 ),
-                SpeedDialChild(
-                    child: Icon(Icons.map_outlined),
-                    label: 'navigation',
-                    onTap: () {
-                      onTapBtnnavigation();
-                    }),
-                SpeedDialChild(
-                  child: Icon(Icons.person),
-                  label: 'My page',
-                ),
+                // SpeedDialChild(
+                //     child: Icon(Icons.map_outlined),
+                //     label: 'navigation',
+                //     onTap: () {
+                //       onTapBtnnavigation();
+                //     }),
+                // SpeedDialChild(
+                //   child: Icon(Icons.person),
+                //   label: 'My page',
+                // ),
                 SpeedDialChild(
                     child: Icon(Icons.star_border),
                     label: 'bookmark',

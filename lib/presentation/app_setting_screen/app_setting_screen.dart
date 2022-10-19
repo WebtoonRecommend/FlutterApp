@@ -23,35 +23,35 @@ class AppSettingScreen extends GetWidget<AppSettingController> {
             child: ListView(
               children: [
                 SizedBox(height: 40,),
-                Row(
-                  children: [
-                    Icon(Icons.person, color: Colors.blue,),
-                    SizedBox(width: 10,),
-                    Text("Account", style: TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.bold),)
-                  ],
-                ),
-                Divider(height: 20, thickness: 1,),
-                SizedBox(height: 10,),
-                buildAccountOption("Change Password"),
-                buildAccountOption("Content Settings"),
-                buildAccountOption("Social"),
-                buildAccountOption("Language"),
-                buildAccountOption("Privacy and Security"),
-                SizedBox(height: 40,),
-                Row(
-                  children: [
-                    Icon(Icons.volume_up_outlined, color: Colors.blue,),
-                    SizedBox(width: 10,),
-                    Text("Notifications", style: TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.bold),)
-                  ],
-                ),
-                Divider(height: 20, thickness: 1,),
-                SizedBox(height: 10,),
-                buildNotificationOption(controller,"Theme Dark", controller.on1, controller.toggle1),
-                buildNotificationOption(controller,"Account Active", controller.on2, controller.toggle2),
-                buildNotificationOption(controller,"Oppertunity", controller.on3, controller.toggle3),
+                // Row(
+                //   children: [
+                //     Icon(Icons.person, color: Colors.blue,),
+                //     SizedBox(width: 10,),
+                //     Text("Account", style: TextStyle(
+                //         fontSize: 22, fontWeight: FontWeight.bold),)
+                //   ],
+                // ),
+                // Divider(height: 20, thickness: 1,),
+                // SizedBox(height: 10,),
+                // buildAccountOption("Change Password"),
+                // buildAccountOption("Content Settings"),
+                // buildAccountOption("Social"),
+                // buildAccountOption("Language"),
+                // buildAccountOption("Privacy and Security"),
+                // SizedBox(height: 40,),
+                // Row(
+                //   children: [
+                //     Icon(Icons.volume_up_outlined, color: Colors.blue,),
+                //     SizedBox(width: 10,),
+                //     Text("Notifications", style: TextStyle(
+                //         fontSize: 22, fontWeight: FontWeight.bold),)
+                //   ],
+                // ),
+                // Divider(height: 20, thickness: 1,),
+                // SizedBox(height: 10,),
+                // buildNotificationOption(controller,"Theme Dark", controller.on1, controller.toggle1),
+                // buildNotificationOption(controller,"Account Active", controller.on2, controller.toggle2),
+                // buildNotificationOption(controller,"Oppertunity", controller.on3, controller.toggle3),
                 // Obx will rebuild Text & Switch when "on" observable changes
                 Center(
                   child: OutlinedButton(
