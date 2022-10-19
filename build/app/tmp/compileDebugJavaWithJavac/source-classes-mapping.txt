@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/application/webtune/BuildConfig.java
+ com.application.webtune.BuildConfig
