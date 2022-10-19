@@ -3,9 +3,9 @@
 #/build/
 /.vscode/
 #/web
-#/windows
-#/linux
-#/macos
+/windows
+/linux
+/macos
 /pubspec.lock
 /.packages
 /.flutter-plugins-dependencies
