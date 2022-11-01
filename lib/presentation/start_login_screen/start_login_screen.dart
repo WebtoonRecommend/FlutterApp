@@ -305,10 +305,14 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
   }
 
   onTapBtnLogin() {
+    // TODO: get jwt
+    
+    // main 화면으로 이동
     Get.offAllNamed(AppRoutes.mainScreen, arguments: userName);
   }
 
   onTapBtnSignup() {
+    // signup 화면으로 이동
     Get.toNamed(AppRoutes.signupScreen);
   }
 }
