@@ -40,7 +40,7 @@ class BookmarkScreen extends GetWidget<BookmarkController> {
                                               (e)=>e.webtoonName==heartController.hearts[index]).isEmpty;
                                       Webtoon? webtoon;
                                       if (isnotloaded) {
-                                        webtoon = await mainController.fetchWebtoon(
+                                        webtoon = await mainController.loadWebtoon(
                                                 heartController
                                                     .hearts[index]);
                                       }

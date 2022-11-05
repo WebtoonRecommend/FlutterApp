@@ -1,19 +1,23 @@
+import 'package:application4/data/controllers/user_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../data/controllers/heart_controller.dart';
+import '../bookmark_screen/controller/bookmark_controller.dart';
 import 'controller/main_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class MainScreen extends GetWidget<MainController> {
-  final heartController = Get.put(HeartController(userid: Get.arguments));
-  final mainController = Get.put(MainController(userid: Get.arguments));
-  // final userController = Get.put(UserController());
-
   @override
   Widget build(BuildContext context) {
-    // userController.updateID(Get.arguments);
+    final userController = Get.find<UserController>();
+    final userModel = userController.user;
+    print("${userModel.ID} ${userModel.token} ${userModel.age} ${userModel.job} ");
+    final mainController = Get.put(MainController(), permanent: true);
+    final heartController = Get.put(HeartController(), permanent: true);
+    Get.put(BookmarkController(), permanent: true);
+
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(

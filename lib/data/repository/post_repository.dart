@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:application4/data/models/user.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/bookmark.dart';
+import '../models/recommend.dart';
+import '../models/webtoon.dart';
+
 
 
 /// instance 저장하는 친구?
@@ -44,5 +48,89 @@ class MyRepository {
   }
 
 
+  /// get recommend list with jwt
+  Future<List<Recommend>?> fetchRecommend() async {
+    var response = await client.get(
+      Uri.parse("http://3.39.22.234/Recommended/${this.userid}"),
+      headers: {"Content-Type": "application/json",
+        "authorization":"Bearer ${token}"},
+    );
+    if(response.statusCode == 200){
+      var jasonData = response.body;
+      return recommendFromJson(jasonData);
+    }
+    else{
+      return null;
+    }
+  }
 
+  /// get webtoon with jwt
+  Future<Webtoon?> fetchWebtoon(String webtoonTitle) async {
+    var response = await client.get(
+      Uri.parse("http://3.39.22.234/WebToon/${webtoonTitle}"),
+      headers: {"Content-Type": "application/json",
+        "authorization":"Bearer ${token}"},
+    );
+
+    if(response.statusCode == 200){
+      var jsonData = response.body;
+      var webtoonData = webtoonFromJson(jsonData);
+
+      return webtoonData;
+    }
+    else return null;
+  }
+
+
+  /// get bookmark list with jwt
+  Future<List<Bookmark>?> fetchBookmark() async{
+    var response = await client.get(
+      Uri.parse("http://3.39.22.234/BookMark/${this.userid}"),
+      headers: {"Content-Type": "application/json",
+        "authorization":"Bearer ${token}"},
+    );
+    if(response.statusCode == 200){
+      var jsonData = response.body;
+      return bookmarkFromJson(jsonData);
+    }
+    else{
+      return null;
+    }
+  }
+
+  /// bookmark delete api
+  Future<bool> deleteWebtoonFromBookmark(String webtoon) async {
+    var response = await client.delete(
+      Uri.parse("http://3.39.22.234/BookMark/${this.userid}/${webtoon}"),
+      headers: {"Content-Type": "application/json",
+        "authorization":"Bearer ${token}"},
+    );
+    if (response.statusCode == 200) return true;
+    else{
+      print(response.statusCode);
+      print(response.body);
+      return false;
+    }
+  }
+
+  /// bookmark post api
+  Future<bool> postWebtoonFromBookmark(String webtoon) async {
+    var data = {
+      "UID": this.userid,
+      "Title": webtoon
+    };
+    var body = json.encode(data);
+    final response = await client.post(
+        Uri.parse("http://3.39.22.234/BookMark"),
+        headers: {"Content-Type": "application/json",
+          "authorization":"Bearer ${token}"},
+        body: body
+    );
+    if (response.statusCode == 200) return true;
+    else{
+      print(response.statusCode);
+      print(response.body);
+      return false;
+    }
+  }
 }
