@@ -10,7 +10,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 class SignupScreen extends GetWidget<SignupController> {
   @override
   Widget build(BuildContext context) {
-    final signupController = Get.put(SignupController());
+    final signupController = Get.put(SignupController(), permanent: true);
     final _formKey = GlobalKey<FormState>();
     String userPassword = '';
     String userName = '';
@@ -464,19 +464,15 @@ class SignupScreen extends GetWidget<SignupController> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                /*
-                                서버로 개인정보 보내기
-                                */
+
+                                //서버로 개인정보 보내기
                                 signupController.userpasswd = userPassword;
-                                bool isusercreated =
-                                    await signupController.postUserData();
+                                bool isusercreated = await signupController.postUserData();
                                 if (isusercreated) {
-                                  var userController =
-                                      Get.find<UserController>();
-                                  userController.updateID(userName);
-                                  bool isuserfound =
-                                      await userController.updateUser();
-                                  if (isuserfound) {
+                                  var userController = Get.find<UserController>();
+                                  userController.setID(userName);
+                                  bool isidExist = await userController.isIdExist("");
+                                  if (isidExist) {
                                     Get.offAllNamed(AppRoutes.keywordselectionScreen, arguments: userName);
                                   } else {
                                     showToast("Sorry, user not found.\n"

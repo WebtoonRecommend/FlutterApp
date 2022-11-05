@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// TODO: progress dialog
 class ProgressDialogUtils {
   static bool isProgressVisible = false;
 

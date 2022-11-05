@@ -22,7 +22,7 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
 
   @override
   Widget build(BuildContext context) {
-    final userController = Get.put(UserController());
+    final userController = Get.put(UserController(), permanent: true);
     return SafeArea(
         child: Scaffold(
             backgroundColor: ColorConstant.whiteA700,
@@ -188,42 +188,35 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                         child: GestureDetector(
                                           onTap: () async {
                                             // ID, passwd 확인된다면
-                                            if (_formKey.currentState!
-                                                .validate()) {
+                                            if (_formKey.currentState!.validate()) {
+
                                               _formKey.currentState!.save();
-                                              /* 로그인 검증
-                                             1. id 존재 유무
-                                             2. id & passwd 일치 여부
-                                             */
-                                              // ID 기억해야함
-                                              userController.updateID(userName);
-                                              var loginStatus =
-                                              await userController.isValid(
-                                                  userPassword);
+                                              var loginStatus = await userController.updateUser(userName,userPassword);
+                                              switch(loginStatus) {
+                                                case 0: {
+                                                  showToast('Welcome!\n'
+                                                      'ID:${userController.userid}\n'
+                                                      'ID:${userController.user.ID}\n'
+                                                      'age:${userController.user.age}\n'
+                                                      'job:${userController.user.job}\n'
+                                                      'sex:${userController.user.sex}\n');
 
-                                              if (loginStatus == 0) {
-                                                userController.updateUser();
-                                                showToast('Welcome!\n'
-                                                    'ID:${userController
-                                                    .userid}\n'
-                                                    'ID:${userController.user
-                                                    .ID}\n'
-                                                    'age:${userController.user
-                                                    .age}\n'
-                                                    'job:${userController.user
-                                                    .job}\n'
-                                                    'sex:${userController.user
-                                                    .sex}\n');
+                                                  onTapBtnLogin();
+                                                } break;
 
-                                                onTapBtnLogin();
-                                              }
-                                              else if (loginStatus == 1) {
-                                                showToast("id & pw mismatch!\n"
-                                                    "please check again");
-                                              }
-                                              else {
-                                                showToast("user not Found!\n"
-                                                    "please sign up");
+                                                case 1: {
+                                                  showToast("id & pw mismatch!\n"
+                                                      "please check again");
+                                                } break;
+
+                                                case 2: {
+                                                  showToast("user not Found!\n"
+                                                      "please sign up");
+                                                } break;
+
+                                                default: {
+                                                  showToast("Failed to get user information");
+                                                } break;
                                               }
                                             }
 
@@ -305,10 +298,8 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
   }
 
   onTapBtnLogin() {
-    // TODO: get jwt
-    
     // main 화면으로 이동
-    Get.offAllNamed(AppRoutes.mainScreen, arguments: userName);
+    Get.offAllNamed(AppRoutes.mainScreen);
   }
 
   onTapBtnSignup() {
