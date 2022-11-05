@@ -27,7 +27,7 @@ class MainController extends GetxController {
   updateRecommendWeboons() async{
     // recommend된 webtoon 데이터만 가져옴
     await _loadRecommendList();
-    recommendList.forEach((element) async {
+    recommendList.value.forEach((element) async {
       // 각각의 웹툰 가져옴
       loadWebtoon(element.webtoonTitle);
     });
@@ -37,7 +37,7 @@ class MainController extends GetxController {
   loadWebtoon(String webtoonTitle) async{
     print(webtoonTitle);
     var webtoon = await myRepository.fetchWebtoon(webtoonTitle);
-    if (webtoon!=null) webtoonList.add(webtoon);
+    if (webtoon!=null && !webtoonList.contains(webtoon)) webtoonList.add(webtoon);
   }
 
   /// 웹툰 추천목록을 가져오는 함수

@@ -1,6 +1,7 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../data/controllers/heart_controller.dart';
+import '../../data/controllers/user_controller.dart';
 import '../main_screen/controller/main_controller.dart';
 import 'controller/search_controller.dart';
 import 'package:application4/core/app_export.dart';
@@ -9,12 +10,17 @@ import 'package:flutter/material.dart';
 class SearchScreen extends GetWidget<SearchController> {
   final fieldText = TextEditingController();
   String searchText = "";
-  final searchController = Get.put(SearchController());
+
+  final userController = Get.find<UserController>();
   HeartController heartController = Get.find<HeartController>();
   MainController mainController = Get.find<MainController>();
 
   @override
   Widget build(BuildContext context) {
+    final userModel = userController.user;
+    print(userModel.token);
+    final searchController = Get.put(SearchController());
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -31,7 +37,7 @@ class SearchScreen extends GetWidget<SearchController> {
                   },
                   onEditingComplete: () {
                     searchController.setSearchText(searchText);
-                    searchController.fetchWebtoonList();
+                    searchController.updateSearchList();
                   },
                   controller: fieldText,
                   decoration: InputDecoration(

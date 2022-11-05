@@ -133,4 +133,29 @@ class MyRepository {
       return false;
     }
   }
+
+
+  /// get search webtoon with jwt
+  Future<List<Webtoon>?> fetchSearchedWebtoonList(String searchText) async {
+    var response = await client.get(
+      Uri.parse("http://3.39.22.234/WebToon/Search/$searchText"),
+      headers: {"Content-Type": "application/json",
+        "authorization":"Bearer ${token}"},
+    );
+    if(response.statusCode == 200){
+      var jsonData = response.body;
+      var webtoonListData = await webtoonFromJsonList(jsonData);
+
+      print(webtoonListData);
+      return webtoonListData;
+    }
+    else{
+      print("${response.statusCode}");
+      print("${response.body}");
+      print("$searchText");
+      return null;
+    }
+  }
+
+
 }

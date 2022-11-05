@@ -1,47 +1,40 @@
 import '../../../data/controllers/heart_controller.dart';
+import '../../../data/repository/post_repository.dart';
 import '../../main_screen/controller/main_controller.dart';
+import '../../signup_screen/signup_screen.dart';
 import '/core/app_export.dart';
 import 'package:application4/presentation/search_screen/models/search_model.dart';
-import 'package:http/http.dart' as http;
 import '../../../data/models/webtoon.dart';
 
 class SearchController extends GetxController {
   Rx<SearchModel> searchModelObj = SearchModel().obs;
   HeartController heartController = Get.find<HeartController>();
   MainController mainController = Get.find<MainController>();
+  MyRepository myRepository = Get.find<MyRepository>();
 
   String _searchText = "";
   var searchList = <Webtoon>[].obs;
-  static var client = http.Client();
 
   void setSearchText(String searchtext){
     _searchText = searchtext;
   }
 
-  Future<void> fetchWebtoonList() async {
-    this.searchList.clear();
-    final response = await client.get(Uri.parse("http://3.39.22.234/WebToon/Search/$_searchText"));
+  updateSearchList() async {
+    this.searchList.value.clear();
+    await _loadSearchList();
+  }
 
-    if(response.statusCode == 200){
-      var jsonData = response.body;
-      var webtoonListData = await webtoonFromJsonList(jsonData);
+  Future<void> _loadSearchList() async{
+    var searches = await myRepository.fetchSearchedWebtoonList(this._searchText);
 
-      webtoonListData.forEach((webtoon) {
-        if (webtoon!=null) {
-          // mainController.webtoonList.add(webtoon);
-          this.searchList.add(webtoon);
-        }
-      });
-
-      print(webtoonListData);
-
+    if (searches != null){
+      searchList.value = searches;
     }
     else{
-      print("${response.statusCode}");
-      print("${response.body}");
-      print("$_searchText");
+      showToast("failed to get search list");
     }
   }
+
   @override
   void onReady() {
     super.onReady();
