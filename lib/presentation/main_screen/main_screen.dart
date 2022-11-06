@@ -147,8 +147,8 @@ class MainScreen extends GetWidget<MainController> {
                                                           itemSize: 20.0,
                                                           direction: Axis.horizontal,
                                                         ),
-                                                        Text(
-                                                            '${mainController.webtoonList[index].webtoonDescription.replaceAll('\n', ' ').substring(0,20)}'+"..."),
+                                                        // Text(
+                                                        //     '${mainController.webtoonList[index].webtoonDescription.replaceAll('\n', ' ').substring(0,20)}'+"..."),
                                                         // Text(
                                                         //     '${heartController.hearts}'),
                                                       ],
@@ -161,13 +161,10 @@ class MainScreen extends GetWidget<MainController> {
                                                           onPressed: () {
                                                             print("${size.width},${size.height}");
                                                             var heartList = heartController.hearts;
-                                                            if (heartList.contains(
-                                                                mainController.webtoonList[index].webtoonName)) {
-                                                              heartController.breakHeartToWebtoon(
-                                                                  mainController.webtoonList[index].webtoonName);
+                                                            if (heartList.contains(mainController.webtoonList[index].webtoonName)) {
+                                                              heartController.breakHeartToWebtoon(mainController.webtoonList[index].webtoonName);
                                                             } else {
-                                                              heartController.heartToWebtoon(
-                                                                  mainController.webtoonList[index].webtoonName);
+                                                              heartController.heartToWebtoon(mainController.webtoonList[index].webtoonName);
                                                             }
                                                           },
                                                           icon: Icon(heartController.hearts.any((webtoonTitle) => webtoonTitle == mainController.webtoonList[index].webtoonName)

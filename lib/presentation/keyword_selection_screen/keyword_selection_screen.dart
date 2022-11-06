@@ -76,6 +76,6 @@ class KeywordSelectionScreen extends GetWidget<KeywordSelectionController> {
   }
 
   onTapBtnSelction(){
-    Get.toNamed(AppRoutes.keywordcloudScreen, arguments: Get.arguments);
+    Get.toNamed(AppRoutes.keywordcloudScreen);
   }
 }

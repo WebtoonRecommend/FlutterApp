@@ -59,7 +59,7 @@ class HeartController extends GetxController{
     var isposted = await myRepository.deleteWebtoonFromBookmark(webtoon);
     if (isposted) {
       hearts.add(webtoon);
-      print("${webtoon} is posted from BookMark.\n");
+      print("${webtoon} is posted on BookMark.\n");
     }
     else {
       print("failed to post ${webtoon} on bookmark.\n");

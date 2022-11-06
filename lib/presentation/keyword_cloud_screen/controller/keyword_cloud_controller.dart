@@ -1,20 +1,20 @@
-import 'dart:convert';
-
+import '../../../data/repository/post_repository.dart';
 import '/core/app_export.dart';
-import 'package:http/http.dart' as http;
 import 'package:application4/presentation/keyword_cloud_screen/models/keyword_cloud_model.dart';
 
 class KeywordCloudController extends GetxController {
   Rx<KeywordCloudModel> mainNextModelObj = KeywordCloudModel().obs;
 
-  String userid;
+  var userid;
   var keywords = <String>[].obs;
   int maxKeywords = 10;
-  static var client = http.Client();
+  MyRepository myRepository = Get.find<MyRepository>();
 
-  KeywordCloudController({
-    required this.userid
-  });
+  @override
+  void onInit() async{
+    super.onInit();
+    userid = myRepository.userid;
+  }
 
   onoffKeyword(String keyword){
     if (keywords.contains(keyword)) {
@@ -38,8 +38,8 @@ class KeywordCloudController extends GetxController {
     keywords.remove(keyword);
   }
 
+  /// keyword 제출
   submitKeyword() async{
-    // keyword post api
     var data = List.generate(0, (index) => Map<String, String>());
     keywords.forEach((element) {
       data.add({
@@ -47,18 +47,14 @@ class KeywordCloudController extends GetxController {
         "Word": element.substring(1)
       });
     });
-    var body = json.encode(data);
 
-    final response = await client.post(
-        Uri.parse("http://3.39.22.234/KeyWords"),
-        headers: {"Content-Type": "application/json"},
-        body: body
-    );
-    if (response.statusCode == 200)
+    bool isposted = await myRepository.postKeyword(data);
+    if (isposted) {
+      print("keyword is posted.\n");
       return true;
+    }
     else{
-      print(response.statusCode);
-      print(response.body);
+      print("failed to post keyword.\n");
       return false;
     }
   }

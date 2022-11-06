@@ -1,6 +1,6 @@
 class Constants {
 
   // aws public IP
-  static const baseUrl = "http://54.180.87.215";
+  static const baseUrl = "http://3.35.9.75";
 
 }

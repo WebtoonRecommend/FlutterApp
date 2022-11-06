@@ -1,5 +1,10 @@
+import 'package:application4/presentation/bookmark_screen/controller/bookmark_controller.dart';
+import 'package:application4/presentation/signup_screen/controller/signup_controller.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../data/controllers/heart_controller.dart';
+import '../../data/controllers/user_controller.dart';
+import '../main_screen/controller/main_controller.dart';
 import 'controller/app_setting_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +12,7 @@ import 'package:flutter/material.dart';
 class AppSettingScreen extends GetWidget<AppSettingController> {
   @override
   Widget build(BuildContext context) {
-    AppSettingController controller = Get.put(AppSettingController()); // Instantiate Get Controller, *in* build()
+    AppSettingController controller = Get.put(AppSettingController(), permanent: true); // Instantiate Get Controller, *in* build()
 
     return SafeArea(
       child: Scaffold(
@@ -62,7 +67,7 @@ class AppSettingScreen extends GetWidget<AppSettingController> {
                       )
                     ),
                     onPressed: () {
-                      Get.offAllNamed(AppRoutes.startLoginScreen);
+                      onTapBtnLogout();
                     },
                     child: Text("SIGN OUT", style: TextStyle(
                       fontSize: 16,
@@ -78,62 +83,74 @@ class AppSettingScreen extends GetWidget<AppSettingController> {
     );
   }
 
-  Padding buildNotificationOption(AppSettingController controller, String title, RxBool value,
-      Function onChangeMethod) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(title, style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600]
-          ),),
-          Obx(() => Switch(
-              // onChangeMethod() 괄호 꼭 넣기
-              onChanged: (val) => onChangeMethod(),
-              value: value.value),
-          )
-        ],
-      ),
-    );
-  }
+  onTapBtnLogout(){
+    Get.delete<UserController>(force: true);
+    Get.delete<MainController>(force: true);
+    Get.delete<HeartController>(force: true);
+    Get.delete<BookmarkController>(force: true);
+    Get.delete<SignupController>(force: true);
+    Get.delete<AppSettingController>(force: true);
 
-  GestureDetector buildAccountOption(String title) {
-    return GestureDetector(
-      onTap: () {
-        Get.dialog(AlertDialog(title: Text(title),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("Option 1"),
-              Text("Option 2"),
-              Text("Option 3"),
-            ],
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text("close"))
-          ],));
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title, style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
-            ),),
-            Icon(Icons.arrow_forward_ios, color: Colors.grey)
-          ],
-        ),
-      ),
-    );
+
+    Get.offAllNamed(AppRoutes.startLoginScreen);
   }
+  //
+  // Padding buildNotificationOption(AppSettingController controller, String title, RxBool value,
+  //     Function onChangeMethod) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       children: [
+  //         Text(title, style: TextStyle(
+  //             fontSize: 20,
+  //             fontWeight: FontWeight.w500,
+  //             color: Colors.grey[600]
+  //         ),),
+  //         Obx(() => Switch(
+  //             // onChangeMethod() 괄호 꼭 넣기
+  //             onChanged: (val) => onChangeMethod(),
+  //             value: value.value),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
+  //
+  // GestureDetector buildAccountOption(String title) {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       Get.dialog(AlertDialog(title: Text(title),
+  //         content: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             Text("Option 1"),
+  //             Text("Option 2"),
+  //             Text("Option 3"),
+  //           ],
+  //         ),
+  //         actions: [
+  //           TextButton(
+  //               onPressed: () {
+  //                 Get.back();
+  //               },
+  //               child: Text("close"))
+  //         ],));
+  //     },
+  //     child: Padding(
+  //       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           Text(title, style: TextStyle(
+  //             fontSize: 20,
+  //             fontWeight: FontWeight.w500,
+  //             color: Colors.grey[600],
+  //           ),),
+  //           Icon(Icons.arrow_forward_ios, color: Colors.grey)
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }

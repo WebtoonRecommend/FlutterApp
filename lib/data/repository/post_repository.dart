@@ -44,6 +44,8 @@ class MyRepository {
       return userFromJson(jasonData);
     }
     else{
+      print(response.statusCode);
+      print(response.body);
       return null;
     }
   }
@@ -61,6 +63,8 @@ class MyRepository {
       return recommendFromJson(jasonData);
     }
     else{
+      print(response.statusCode);
+      print(response.body);
       return null;
     }
   }
@@ -79,7 +83,11 @@ class MyRepository {
 
       return webtoonData;
     }
-    else return null;
+    else {
+      print(response.statusCode);
+      print(response.body);
+      return null;
+    }
   }
 
 
@@ -95,6 +103,8 @@ class MyRepository {
       return bookmarkFromJson(jsonData);
     }
     else{
+      print(response.statusCode);
+      print(response.body);
       return null;
     }
   }
@@ -159,4 +169,41 @@ class MyRepository {
   }
 
 
+
+  /// user post api
+  postUserData(var data) async {
+    var body = json.encode(data);
+    var response = await http.Client().post(
+        Uri.parse("${baseUrl}/User"),
+        headers: {"Content-Type": "application/json"},
+        body: body
+    );
+    if (response.statusCode == 200)
+      return true;
+    else {
+      print(response.statusCode);
+      print(response.body);
+      return false;
+    }
+  }
+
+
+  /// keyword post api
+  postKeyword(var data) async{
+    var body = json.encode(data);
+
+    final response = await client.post(
+        Uri.parse("${baseUrl}/KeyWords"),
+        headers: {"Content-Type": "application/json",
+        "authorization":"Bearer ${token}"},
+        body: body
+    );
+    if (response.statusCode == 200)
+      return true;
+    else{
+      print(response.statusCode);
+      print(response.body);
+      return false;
+    }
+  }
 }

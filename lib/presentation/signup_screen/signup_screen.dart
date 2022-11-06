@@ -1,4 +1,3 @@
-import 'package:application4/data/controllers/user_controller.dart';
 import 'package:application4/presentation/signup_screen/controller/signup_controller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -271,19 +270,15 @@ class SignupScreen extends GetWidget<SignupController> {
                                 child: TextFormField(
                                   key: ValueKey(1),
                                   validator: (value) {
-                                    /*
-                                                  * ID 유효성 판단:
-                                                  * server user에 존재하는지 판단
-                                                  * */
+                                    /**
+                                     * ID 유효성 판단:
+                                     * server user에 존재하는지 판단
+                                     * */
                                     if (value!.isEmpty || value.length < 4) {
                                       return 'Please enter at least 4 characters';
-                                    } else if (signupController
-                                            .isduplication.value ==
-                                        0) {
+                                    } else if (signupController.isduplication.value == 0) {
                                       return 'Please check the ID duplication';
-                                    } else if (signupController
-                                            .isduplication.value ==
-                                        1) {
+                                    } else if (signupController.isduplication.value == 1) {
                                       return 'duplicated ID!';
                                     }
                                     return null;
@@ -345,7 +340,7 @@ class SignupScreen extends GetWidget<SignupController> {
                                           showToast('Please enter at least 4 characters');
                                         }
                                         else{
-                                          signupController.userid = userName;
+                                          signupController.setID(userName);
                                           await signupController.isDuplication();
                                         }
                                       },
@@ -469,11 +464,10 @@ class SignupScreen extends GetWidget<SignupController> {
                                 signupController.userpasswd = userPassword;
                                 bool isusercreated = await signupController.postUserData();
                                 if (isusercreated) {
-                                  var userController = Get.find<UserController>();
-                                  userController.setID(userName);
-                                  bool isidExist = await userController.isIdExist("");
+                                  signupController.setID(userName);
+                                  bool isidExist = await signupController.userController.isIdExist("");
                                   if (isidExist) {
-                                    Get.offAllNamed(AppRoutes.keywordselectionScreen, arguments: userName);
+                                    onTapBtnSignup();
                                   } else {
                                     showToast("Sorry, user not found.\n"
                                         "try again.");
@@ -507,6 +501,9 @@ class SignupScreen extends GetWidget<SignupController> {
     );
   }
 
+  onTapBtnSignup() {
+    Get.offAllNamed(AppRoutes.keywordselectionScreen);
+  }
 }
 
 void showToast(String message) {

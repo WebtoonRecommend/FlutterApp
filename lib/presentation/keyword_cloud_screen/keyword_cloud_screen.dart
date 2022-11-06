@@ -1,3 +1,5 @@
+import 'package:application4/presentation/start_login_screen/start_login_screen.dart';
+
 import 'controller/keyword_cloud_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:flutter_scatter/flutter_scatter.dart';
 import 'models/flutter_hashtags.dart';
 
 class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
-  final keywordCloudController = Get.put(KeywordCloudController(userid: Get.arguments));
+  final keywordCloudController = Get.put(KeywordCloudController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,12 @@ class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
               automaticallyImplyLeading: false,
               actions: [TextButton(
                 onPressed: () async {
-                  await keywordCloudController.submitKeyword();
+                  bool issubmitted = await keywordCloudController.submitKeyword();
+                  if (!issubmitted){
+                    showToast("failed to submit keyword.\nPlease set again in setting page.");
+                  }
+
+
                   onTapBtnDone();
                 },
                 child: Text("완료",
