@@ -6,12 +6,13 @@ import 'package:http/http.dart' as http;
 import '../models/bookmark.dart';
 import '../models/recommend.dart';
 import '../models/webtoon.dart';
-
+import 'package:application4/core/constants/constants.dart';
 
 
 /// instance 저장하는 친구?
 class MyRepository {
   static var client = http.Client();
+  static const baseUrl = Constants.baseUrl;
   var userid = "";
   var token = "";
 
@@ -22,7 +23,7 @@ class MyRepository {
     var data = {"PassWd":passwd};
     var body = json.encode(data);
     var response = await client.post(
-        Uri.parse("http://3.39.22.234/User/${this.userid}"),
+        Uri.parse("${baseUrl}/User/${userid}"),
         headers: {"Content-Type": "application/json"},
         body: body
     );
@@ -34,7 +35,7 @@ class MyRepository {
   /// repository에 User 정보를 등록
   Future<User?> fetchUserData() async {
     var response = await client.get(
-      Uri.parse("http://3.39.22.234/User/${this.userid}"),
+      Uri.parse("${baseUrl}/User/${userid}"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
@@ -51,7 +52,7 @@ class MyRepository {
   /// get recommend list with jwt
   Future<List<Recommend>?> fetchRecommend() async {
     var response = await client.get(
-      Uri.parse("http://3.39.22.234/Recommended/${this.userid}"),
+      Uri.parse("${baseUrl}/Recommended/${userid}"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
@@ -67,7 +68,7 @@ class MyRepository {
   /// get webtoon with jwt
   Future<Webtoon?> fetchWebtoon(String webtoonTitle) async {
     var response = await client.get(
-      Uri.parse("http://3.39.22.234/WebToon/${webtoonTitle}"),
+      Uri.parse("${baseUrl}/WebToon/${webtoonTitle}"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
@@ -85,7 +86,7 @@ class MyRepository {
   /// get bookmark list with jwt
   Future<List<Bookmark>?> fetchBookmark() async{
     var response = await client.get(
-      Uri.parse("http://3.39.22.234/BookMark/${this.userid}"),
+      Uri.parse("${baseUrl}/BookMark/${userid}"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
@@ -101,7 +102,7 @@ class MyRepository {
   /// bookmark delete api
   Future<bool> deleteWebtoonFromBookmark(String webtoon) async {
     var response = await client.delete(
-      Uri.parse("http://3.39.22.234/BookMark/${this.userid}/${webtoon}"),
+      Uri.parse("${baseUrl}/BookMark/${userid}/${webtoon}"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
@@ -121,7 +122,7 @@ class MyRepository {
     };
     var body = json.encode(data);
     final response = await client.post(
-        Uri.parse("http://3.39.22.234/BookMark"),
+        Uri.parse("${baseUrl}/BookMark"),
         headers: {"Content-Type": "application/json",
           "authorization":"Bearer ${token}"},
         body: body
@@ -138,7 +139,7 @@ class MyRepository {
   /// get search webtoon with jwt
   Future<List<Webtoon>?> fetchSearchedWebtoonList(String searchText) async {
     var response = await client.get(
-      Uri.parse("http://3.39.22.234/WebToon/Search/$searchText"),
+      Uri.parse("${baseUrl}/WebToon/Search/$searchText"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
