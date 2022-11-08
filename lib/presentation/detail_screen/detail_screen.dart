@@ -42,26 +42,39 @@ class DetailScreen extends GetWidget<DetailController> {
                           bottom: 12,
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Padding(
-                              padding: getPadding(
-                                top: 19,
-                                bottom: 5,
-                              ),
-                              child: Text(
+                            Container(
+                              width: 50,
+                            ),
+                            Expanded(
+                              child:
+                              webtoon.webtoonName.length<=9 ?
+                              (Text(
                                 "${webtoon.webtoonName}",
                                 overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtInterExtraLight25
-                                    .copyWith(),
-                              ),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: ColorConstant.black900,
+                                  fontSize: getFontSize(
+                                    30))
+                              )):
+                              (FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Text(
+                                  "${webtoon.webtoonName}",
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtInterExtraLight25
+                                      .copyWith(),
+                                ),
+                              ))
                             ),
                             Container(
                               margin: getMargin(
-                                left: 36,
+                                left: 10,
                               ),
                               decoration:
                               AppDecoration.fillLightblue100.copyWith(
@@ -153,7 +166,7 @@ class DetailScreen extends GetWidget<DetailController> {
                           right: 34,
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -169,19 +182,26 @@ class DetailScreen extends GetWidget<DetailController> {
                                     .copyWith(),
                               ),
                             ),
-                            Padding(
-                              padding: getPadding(
-                                left: 107,
-                                top: 1,
-                              ),
-                              child: Text(
-                                "${webtoon.webtoonist}",
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtInterExtraLight25
-                                    .copyWith(),
-                              ),
+                            // SizedBox(width: 50,),
+                            Container(
+                              alignment: Alignment.center,
+                              width: 200,
+                              child:
+                                  webtoon.webtoonist.length <= 5 ?
+                              (Text(
+                                  "${webtoon.webtoonist}",
+                                  style: TextStyle(fontSize: 20),
+                              )) :
+                                (FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Text(
+                                  "${webtoon.webtoonist}",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ))
+
                             ),
+
                           ],
                         ),
                       ),
