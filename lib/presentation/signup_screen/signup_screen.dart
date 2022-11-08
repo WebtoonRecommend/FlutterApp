@@ -1,5 +1,4 @@
 import 'package:application4/presentation/signup_screen/controller/signup_controller.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../theme/palette.dart';
 import 'package:application4/core/app_export.dart';
@@ -504,12 +503,4 @@ class SignupScreen extends GetWidget<SignupController> {
   onTapBtnSignup() {
     Get.offAllNamed(AppRoutes.keywordselectionScreen);
   }
-}
-
-void showToast(String message) {
-  Fluttertoast.showToast(
-      msg: message,
-      backgroundColor: Colors.blueGrey,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM);
 }

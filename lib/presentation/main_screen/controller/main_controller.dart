@@ -1,7 +1,4 @@
-import 'package:application4/presentation/signup_screen/signup_screen.dart';
-
 import '../../../data/models/webtoon.dart';
-import '../../../data/repository/post_repository.dart';
 import '/core/app_export.dart';
 import 'package:application4/presentation/main_screen/models/main_model.dart';
 import '../../../data/models/recommend.dart';

@@ -7,7 +7,6 @@ import 'controller/start_login_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class StartLoginScreen extends GetWidget<StartLoginController> {
   bool isSignupScreen = true;
@@ -17,7 +16,6 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
   String userEmail = '';
   String userPassword = '';
   File? userPickedImage;
-  String? url;
 
 
   @override
@@ -308,10 +306,3 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
   }
 }
 
-void showToast(String message) {
-  Fluttertoast.showToast(
-      msg: message,
-      backgroundColor: Colors.blueGrey,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM);
-}

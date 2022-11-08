@@ -1,7 +1,6 @@
 import 'package:application4/data/controllers/heart_controller.dart';
 import 'package:application4/data/models/webtoon.dart';
 import 'package:application4/presentation/main_screen/controller/main_controller.dart';
-import 'package:application4/presentation/signup_screen/signup_screen.dart';
 
 import 'controller/bookmark_controller.dart';
 import 'package:application4/core/app_export.dart';
