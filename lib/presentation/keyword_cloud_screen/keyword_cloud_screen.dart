@@ -1,17 +1,17 @@
-import 'package:application4/presentation/start_login_screen/start_login_screen.dart';
-
+import '../../widgets/scatter_item.dart';
 import 'controller/keyword_cloud_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scatter/flutter_scatter.dart';
 
-import 'models/flutter_hashtags.dart';
+import '../../data/models/flutter_hashtags.dart';
 
 class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
   final keywordCloudController = Get.put(KeywordCloudController());
 
   @override
   Widget build(BuildContext context) {
+    // word cloud용 변수
     List<Widget> widgets = <Widget>[];
     for (var i = 0; i < kFlutterHashtags.length; i++) {
       widgets.add(ScatterItem(kFlutterHashtags[i], i, keywordCloudController));
@@ -26,22 +26,27 @@ class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
               title: Text("키워드 선택"),
               centerTitle: true,
               automaticallyImplyLeading: false,
-              actions: [TextButton(
+              actions: [
+                // 키워드 선택완료 버튼
+                TextButton(
                 onPressed: () async {
+                  // 선택한 키워드를 서버에 제출
                   bool issubmitted = await keywordCloudController.submitKeyword();
                   if (!issubmitted){
+                    // 실패시 회원가입은 그대로 진행되고,
+                    // TODO: setting에서 키워드를 다시 설정할 수 있게 해야함
                     showToast("failed to submit keyword.\nPlease set again in setting page.");
                   }
-
-
                   onTapBtnDone();
                 },
                 child: Text("완료",
                 style: TextStyle(
                   color: Colors.white
                 ),),
-              ),]
+              ),
+              ]
             ),
+            // word cloud 구현 부분
             body: Container(
                 width: size.width,
                 height: size.height,
@@ -65,6 +70,7 @@ class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
                             delegate: ArchimedeanSpiralScatterDelegate(ratio: ratio,a: 5, b: 30),
                             children: widgets.sublist(14,21),
                           ),
+                          // 선택한 키워드를 리스트로 보여줌 (디버깅용)
                           Obx(()=>Offstage(
                               // obx 함수가 Rx variable in the root scope of the callback의 변화만 탐지하기 때문에 새로 만들어줌
                               offstage: true,
@@ -99,45 +105,3 @@ class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
   }
 }
 
-class ScatterItem extends StatelessWidget {
-  ScatterItem(this.hashtag, this.index, this.keywordCloudController);
-  final FlutterHashtag hashtag;
-  final int index;
-  final keywordCloudController;
-  bool isOn=false;
-
-  @override
-  Widget build(BuildContext context) {
-    final TextStyle? style = Theme.of(context).textTheme.bodyText1?.copyWith(
-      fontSize: hashtag.size.toDouble(),
-      // color: hashtag.color,
-        color: Colors.black,
-      height: 1.1
-    );
-    return GetBuilder<KeywordCloudController>(
-      builder: (_){
-        return ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.all(20.0),
-                side: BorderSide(width:10, color: Colors.black.withOpacity(0)),
-              foregroundColor: Colors.blue,
-                // backgroundColor: hashtag.color,
-                backgroundColor: isOn ? hashtag.color : Colors.white24,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)
-                ),
-                elevation: 0.0,
-            ),
-            onPressed: (){
-              isOn = keywordCloudController.onoffKeyword(hashtag.hashtag);
-            },
-            child: Text(
-                // hashtag.rotated ? StringUtils.addCharAtPosition(hashtag.hashtag, '\n', 1, repeat: true) :
-                hashtag.hashtag,
-                style: style,
-              )
-      );}
-    );
-
-  }
-}
