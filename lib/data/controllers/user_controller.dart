@@ -1,25 +1,24 @@
 import 'package:application4/core/app_export.dart';
 import 'package:application4/data/models/user.dart';
 
-import '../repository/post_repository.dart';
 
 class UserController extends GetxController {
   var userid = "".obs();
   var user = User(ID: "").obs();
 
-  MyRepository myRepository = Get.find<MyRepository>();
+  Repository myRepository = Get.find<Repository>();
 
   ///userid 등록 함수
   setID(var userid) {
     this.userid = userid;
     this.user.ID = userid;
-    myRepository.userid = userid;
+    myRepository.setUserid(userid);
   }
 
   /// token 등록 함수
   setToken(String token) {
     this.user.token = token;
-    myRepository.token = token;
+    myRepository.setToken(token);
   }
 
   /**
