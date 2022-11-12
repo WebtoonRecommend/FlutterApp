@@ -67,10 +67,10 @@ class SearchScreen extends GetWidget<SearchController> {
               Expanded(
                 // searchcontroller의 searchs 검색 목록을 가져와 보여줌
                 child: ListView.builder(
-                    itemCount: searchController.searchs.length,
+                    itemCount: searchController.searches.length,
                     keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                     itemBuilder: (context, index) {
-                      String webtoonTitle = searchController.searchs[index];
+                      String webtoonTitle = searchController.searches[index];
                       // 웹툰 preview 위젯
                       return WebtoonPreview(
                         // 하트 버튼 처리 함수

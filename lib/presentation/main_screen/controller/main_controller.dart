@@ -1,4 +1,3 @@
-import '../../../data/models/webtoon.dart';
 import '/core/app_export.dart';
 import 'package:application4/presentation/main_screen/models/main_model.dart';
 import '../../../data/models/recommend.dart';
@@ -7,15 +6,19 @@ class MainController extends GetxController {
   Rx<MainTwoModel> mainTwoModelObj = MainTwoModel().obs;
 
   var isLoding = 1.obs;
-  var webtoonList = <Webtoon>[].obs;
-  var recommendList = <Recommend>[].obs;
 
-  MyRepository myRepository = Get.find<MyRepository>();
+  // 실질적인 추천 웹툰 목록
+  var recomms = <String>[].obs;
+  // api 통신용 추천 list
+  var recommendList = <Recommend>[].obs;
+  // 모든 webtoon은 repository에 저장하고 있음
+  Repository myRepository = Get.find<Repository>();
 
 
   @override
   void onInit() async{
     super.onInit();
+    // main화면 들어갈 때 추천 웹툰을 받아옴
     await updateRecommendWeboons();
     isLoding.value = 0;
   }
@@ -26,15 +29,18 @@ class MainController extends GetxController {
     await _loadRecommendList();
     recommendList.value.forEach((element) async {
       // 각각의 웹툰 가져옴
-      loadWebtoon(element.webtoonTitle);
+      await loadWebtoon(element.webtoonTitle);
+      // obx가 변화를 탐지하기 위해서는
+      // 각 웹툰이 repository에 저장될때마다 recomms에 추가하는 방식이 적절함
+      recomms.add(element.webtoonTitle);
+      print("recomms : $recomms");
     });
   }
 
-  /// webtoonList에 웹툰 정보를 추가하는 함수
+  /// repository에 웹툰 정보를 추가하는 함수
   loadWebtoon(String webtoonTitle) async{
     print(webtoonTitle);
-    var webtoon = await myRepository.fetchWebtoon(webtoonTitle);
-    if (webtoon!=null && !webtoonList.contains(webtoon)) webtoonList.add(webtoon);
+    await myRepository.fetchWebtoon(webtoonTitle);
   }
 
   /// 웹툰 추천목록을 가져오는 함수
