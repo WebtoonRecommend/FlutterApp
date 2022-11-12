@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 class BookmarkScreen extends GetWidget<BookmarkController> {
   HeartController heartController = Get.find<HeartController>();
   MainController mainController = Get.find<MainController>();
+  Repository myRepository = Get.find<Repository>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,30 +30,28 @@ class BookmarkScreen extends GetWidget<BookmarkController> {
                           itemCount: heartController.hearts.length,
                           itemBuilder: (context, index) {
                             index = heartController.hearts.length - index-1;
+                            String webtoonTitle = heartController.hearts[index];
                             return Container(
+                              // 즐겨찾기 웹툰 목록들
                               child: Column(
                                 children: [
                                   SizedBox(height: 30,),
                                   GestureDetector(
+                                    // 즐겨찾기 웹툰 제목을 클릭하면 detail 페이지로 넘어간다.
                                     onTap: () async {
-                                      bool isnotloaded = mainController.webtoonList.where(
-                                              (e)=>e.webtoonName==heartController.hearts[index]).isEmpty;
-                                      Webtoon? webtoon;
-                                      if (isnotloaded) {
-                                        webtoon = await mainController.loadWebtoon(
-                                                heartController
-                                                    .hearts[index]);
-                                      }
-                                      else{
-                                        webtoon = mainController.webtoonList.where(
-                                                (e)=>e.webtoonName==heartController.hearts[index]).first;
-                                      }
+                                      // repository에 있는 webtoonlist에서 원하는 웹툰을 찾음
+                                      bool isloaded = myRepository.webtoonList.keys.any(
+                                              (title)=>title == webtoonTitle);
 
+                                      Webtoon? webtoon;
+                                      // 찾으려는 즐겨찾기 웹툰이 존재 하는 않는 경우,
+                                      // 한 번 더 로드해보고, 그래도 없으면 toast로 알린다.
+                                      if (!isloaded) webtoon = await mainController.loadWebtoon(webtoonTitle);
+                                      else webtoon = myRepository.webtoonList[webtoonTitle];
+
+                                      // 존재하면 detail 페이지로 넘어간다.
                                       if (webtoon!=null) {
-                                        Get.toNamed(
-                                            AppRoutes.detailScreen,
-                                            arguments:webtoon
-                                        );
+                                        Get.toNamed(AppRoutes.detailScreen, arguments:webtoon);
                                       }
                                       else{
                                         print(webtoon);
@@ -61,8 +60,9 @@ class BookmarkScreen extends GetWidget<BookmarkController> {
                                     },
                                     child: Container(
                                       alignment: Alignment.center,
+                                      // 즐겨찾기 제목
                                       child: Text(
-                                        "${heartController.hearts[index]}",
+                                        "${webtoonTitle}",
                                         overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.left,
                                         style:
@@ -79,7 +79,4 @@ class BookmarkScreen extends GetWidget<BookmarkController> {
             )));
   }
 
-  onTapTxttf() {
-    Get.toNamed(AppRoutes.detailScreen);
-  }
 }
