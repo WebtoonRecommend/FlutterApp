@@ -20,7 +20,7 @@ export 'package:application4/routes/app_routes.dart';
 
 export 'package:application4/data/models/selectionPopupModel/selection_popup_model.dart';
 export 'package:application4/data/apiClient/api_client.dart';
-export 'package:application4/data/repository/post_repository.dart';
+export 'package:application4/data/repository/repository.dart';
 
 export 'package:application4/widgets/common_image_view.dart';
 

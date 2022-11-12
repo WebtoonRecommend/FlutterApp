@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:application4/core/app_export.dart';
-import 'package:application4/data/controllers/user_controller.dart';
-import 'package:application4/data/repository/post_repository.dart';
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
@@ -24,11 +22,11 @@ class User {
   dynamic token;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    ID: Get.find<MyRepository>().userid,
+    ID: Get.find<Repository>().userid,
     age: json["Age"],
     job: json["Job"],
     sex: json["Sex"],
-    token: Get.find<MyRepository>().token,
+    token: Get.find<Repository>().token,
   );
 
   Map<String, dynamic> toJson() => {

@@ -1,14 +1,14 @@
 import 'package:application4/core/app_export.dart';
 import 'package:application4/presentation/main_screen/controller/main_controller.dart';
-import 'package:application4/presentation/start_login_screen/start_login_screen.dart';
 import '../../data/models/bookmark.dart';
-import '../repository/post_repository.dart';
 
 class HeartController extends GetxController{
+  // 실질적인 즐겨찾기 웹툰 목록
   var hearts = <String>[].obs;
-  var bookmarkList = <Bookmark>[].obs;
+  // api 통신용 bookmark list
+  var bookmarkList = <Bookmark>[];
 
-  MyRepository myRepository = Get.find<MyRepository>();
+  Repository myRepository = Get.find<Repository>();
   MainController mainController = Get.find<MainController>();
 
   @override
@@ -18,15 +18,16 @@ class HeartController extends GetxController{
     await updateBookmarkWebtoons();
   }
 
-  /// bookmark 웹툰을 등록하는 함수
+  /// bookmark 목록에 기재된 웹툰들을 repository, hearts에 등록하는 함수
   updateBookmarkWebtoons() async{
     // recommend된 webtoon 데이터만 가져옴
     await _loadBookmarkList();
     bookmarkList.forEach((element) async {
-      // 각각의 웹툰 가져옴
+      // 각각의 웹툰을 가져옴
       mainController.loadWebtoon(element.webtoonTitle);
       hearts.add(element.webtoonTitle);
     });
+    // 중복 제거
     hearts.toSet().toList();
     print(hearts);
   }
@@ -35,7 +36,7 @@ class HeartController extends GetxController{
   Future<void> _loadBookmarkList() async{
     var recommends = await myRepository.fetchBookmark();
     if (recommends != null){
-      bookmarkList.value = recommends;
+      bookmarkList = recommends;
     }
     else{
       showToast("failed to get bookmark list");
