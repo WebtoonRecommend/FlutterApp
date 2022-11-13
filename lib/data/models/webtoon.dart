@@ -1,4 +1,6 @@
 import 'dart:convert';
+
+/// webtoon class list handling
 List<Webtoon> webtoonFromJsonList(String str) => List<Webtoon>.from(json.decode(str).map((x) => Webtoon.fromJson(x)));
 String webtoonToJsonList(List<Webtoon> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
@@ -34,8 +36,7 @@ class Webtoon{
     required this.webtoonStarRating,
   });
 
-//  json to class 함수 생성하기
-// main_controller.dart 참고
+  /// json to Webtoon class 함수
   factory Webtoon.fromJson(Map<String, dynamic> json) => Webtoon(
     webtoonName: json["이름"],
     webtoonist: json["작가"],
@@ -51,6 +52,7 @@ class Webtoon{
     webtoonStarRating: json["별점"],
   );
 
+  /// Webtoon class to json 함수
   Map<String, dynamic> toJson() => {
     "이름": webtoonName,
     "작가": webtoonist,

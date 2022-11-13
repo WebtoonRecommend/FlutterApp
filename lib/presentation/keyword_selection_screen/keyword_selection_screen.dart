@@ -17,6 +17,7 @@ class KeywordSelectionScreen extends GetWidget<KeywordSelectionController> {
             height: size.height,
             child: Column(
               children: [
+                // 환영 인사
                 Expanded(
                   flex: 2,
                   child: Align(
@@ -29,6 +30,7 @@ class KeywordSelectionScreen extends GetWidget<KeywordSelectionController> {
                   ),
                 ),
                 // Expanded(flex: 1,child: SizedBox()),
+                // 선택 시작 버튼
                 Expanded(
                     flex: 5,
                     child: GestureDetector(
@@ -76,6 +78,6 @@ class KeywordSelectionScreen extends GetWidget<KeywordSelectionController> {
   }
 
   onTapBtnSelction(){
-    Get.toNamed(AppRoutes.keywordcloudScreen, arguments: Get.arguments);
+    Get.toNamed(AppRoutes.keywordcloudScreen);
   }
 }

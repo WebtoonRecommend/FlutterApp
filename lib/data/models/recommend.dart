@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final recommend = recommendFromJson(jsonString);
-
 import 'dart:convert';
 
 List<Recommend> recommendFromJson(String str) => List<Recommend>.from(json.decode(str).map((x) => Recommend.fromJson(x)));
@@ -19,12 +15,14 @@ class Recommend {
   String uid;
   String webtoonTitle;
 
+  /// json to Recommend class 함수
   factory Recommend.fromJson(Map<String, dynamic> json) => Recommend(
     id: json["ID"],
     uid: json["UID"],
     webtoonTitle: json["WebtoonTitle"],
   );
 
+  /// Recommend class to json 함수
   Map<String, dynamic> toJson() => {
     "ID": id,
     "UID": uid,

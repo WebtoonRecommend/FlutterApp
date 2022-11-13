@@ -42,26 +42,39 @@ class DetailScreen extends GetWidget<DetailController> {
                           bottom: 12,
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Padding(
-                              padding: getPadding(
-                                top: 19,
-                                bottom: 5,
-                              ),
-                              child: Text(
+                            Container(
+                              width: 50,
+                            ),
+                            // 웹툰 제목
+                            Expanded(
+                              child: webtoon.webtoonName.length<=9 ?
+                              (Text(
                                 "${webtoon.webtoonName}",
                                 overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtInterExtraLight25
-                                    .copyWith(),
-                              ),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: ColorConstant.black900,
+                                  fontSize: getFontSize(
+                                    30))
+                              )):
+                              (FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Text(
+                                  "${webtoon.webtoonName}",
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: AppStyle.txtInterExtraLight25
+                                      .copyWith(),
+                                ),
+                              ))
                             ),
                             Container(
                               margin: getMargin(
-                                left: 36,
+                                left: 10,
                               ),
                               decoration:
                               AppDecoration.fillLightblue100.copyWith(
@@ -75,17 +88,14 @@ class DetailScreen extends GetWidget<DetailController> {
                                 mainAxisAlignment:
                                 MainAxisAlignment.start,
                                 children: [
-
+                                  // 하트 아이콘
                                   Obx(()=> IconButton(
                                       onPressed: () {
                                         var heartList = heartController.hearts;
-                                        if (heartList.contains(
-                                            webtoon.webtoonName)) {
-                                          heartController.breakHeartToWebtoon(
-                                              webtoon.webtoonName);
+                                        if (heartList.contains(webtoon.webtoonName)) {
+                                          heartController.breakHeartToWebtoon(webtoon.webtoonName);
                                         } else {
-                                          heartController.heartToWebtoon(
-                                              webtoon.webtoonName);
+                                          heartController.heartToWebtoon(webtoon.webtoonName);
                                         }
                                       },
                                       icon: Icon(heartController.hearts.any((webtoonTitle) => webtoonTitle == webtoon.webtoonName)
@@ -100,6 +110,7 @@ class DetailScreen extends GetWidget<DetailController> {
                                       right: 11,
                                       bottom: 4,
                                     ),
+                                    // 하트 수
                                     child: Text(
                                       "lbl_77".tr,
                                       overflow: TextOverflow.ellipsis,
@@ -117,7 +128,7 @@ class DetailScreen extends GetWidget<DetailController> {
                       ),
                     ),
                     Container(
-                      // 썸네일
+                      // 썸네일 이미지
                       margin: getMargin(
                         left: 13,
                         top: 4,
@@ -144,6 +155,7 @@ class DetailScreen extends GetWidget<DetailController> {
                         ),
                       ),
                     ),
+                    // 작가
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -153,7 +165,7 @@ class DetailScreen extends GetWidget<DetailController> {
                           right: 34,
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -169,23 +181,31 @@ class DetailScreen extends GetWidget<DetailController> {
                                     .copyWith(),
                               ),
                             ),
-                            Padding(
-                              padding: getPadding(
-                                left: 107,
-                                top: 1,
-                              ),
-                              child: Text(
-                                "${webtoon.webtoonist}",
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtInterExtraLight25
-                                    .copyWith(),
-                              ),
+                            // SizedBox(width: 50,),
+                            Container(
+                              alignment: Alignment.center,
+                              width: 200,
+                              child:
+                                  webtoon.webtoonist.length <= 5 ?
+                              (Text(
+                                  "${webtoon.webtoonist}",
+                                  style: TextStyle(fontSize: 20),
+                              )) :
+                                (FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Text(
+                                  "${webtoon.webtoonist}",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ))
+
                             ),
+
                           ],
                         ),
                       ),
                     ),
+                    // 별점
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -232,6 +252,7 @@ class DetailScreen extends GetWidget<DetailController> {
                         ),
                       ),
                     ),
+                    // 줄거리
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
@@ -248,6 +269,7 @@ class DetailScreen extends GetWidget<DetailController> {
                         ),
                       ),
                     ),
+                    // 줄거리 내용
                     Align(
                       alignment: Alignment.center,
                       child: Container(
@@ -267,9 +289,11 @@ class DetailScreen extends GetWidget<DetailController> {
                         ),
                       ),
                     ),
+                    // 웹툰 사이트 버튼
                     CustomButton(
                       onTap: (){
-                        final Uri _url = Uri.parse('https://comic.naver.com${webtoon.webtoonLink}');
+                        String site_basUrl = 'https://comic.naver.com';
+                        final Uri _url = Uri.parse('${site_basUrl}${webtoon.webtoonLink}');
                         _launchUrl(_url);
                       },
                       width: 194,

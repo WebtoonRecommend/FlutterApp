@@ -1,71 +1,56 @@
-import '../../../data/models/webtoon.dart';
 import '/core/app_export.dart';
 import 'package:application4/presentation/main_screen/models/main_model.dart';
-import 'package:http/http.dart' as http;
 import '../../../data/models/recommend.dart';
 
 class MainController extends GetxController {
   Rx<MainTwoModel> mainTwoModelObj = MainTwoModel().obs;
 
-  String userid;
   var isLoding = 1.obs;
-  var webtoonList = <Webtoon>[].obs;
-  var recommendList = <Recommend>[].obs;
 
-  MainController({
-    required this.userid
-  });
+  // 실질적인 추천 웹툰 목록
+  var recomms = <String>[].obs;
+  // api 통신용 추천 list
+  var recommendList = <Recommend>[].obs;
+  // 모든 webtoon은 repository에 저장하고 있음
+  Repository myRepository = Get.find<Repository>();
 
 
   @override
   void onInit() async{
     super.onInit();
-    await fetchRecommendListData();
-    // recommend된 webtoon 데이터만 가져옴
-    recommendList.forEach((element) async {
-      print(element.webtoonTitle);
-      var webtoon = await fetchWebtoon(element.webtoonTitle);
-      if (webtoon!=null) webtoonList.add(webtoon);
-    });
-    // fetchWebtoonListData1();
-    // fetchWebtoonListData2();
+    // main화면 들어갈 때 추천 웹툰을 받아옴
+    await updateRecommendWeboons();
     isLoding.value = 0;
   }
 
-  Future<void> fetchRecommendListData() async{
-    var recommends = await fetchRecommend();
+  /// 추천 웹툰을 등록하는 함수
+  updateRecommendWeboons() async{
+    // recommend된 webtoon 데이터만 가져옴
+    await _loadRecommendList();
+    recommendList.value.forEach((element) async {
+      // 각각의 웹툰 가져옴
+      await loadWebtoon(element.webtoonTitle);
+      // obx가 변화를 탐지하기 위해서는
+      // 각 웹툰이 repository에 저장될때마다 recomms에 추가하는 방식이 적절함
+      recomms.add(element.webtoonTitle);
+      print("recomms : $recomms");
+    });
+  }
+
+  /// repository에 웹툰 정보를 추가하는 함수
+  loadWebtoon(String webtoonTitle) async{
+    print(webtoonTitle);
+    await myRepository.fetchWebtoon(webtoonTitle);
+  }
+
+  /// 웹툰 추천목록을 가져오는 함수
+  Future<void> _loadRecommendList() async{
+    var recommends = await myRepository.fetchRecommend();
     if (recommends != null){
       recommendList.value = recommends;
     }
-  }
-  static var client = http.Client();
-
-  Future<List<Recommend>?> fetchRecommend() async {
-    final response = await client.get(Uri.parse("http://3.39.22.234/Recommended/${this.userid}"));
-
-    if(response.statusCode == 200){
-      var jasonData = response.body;
-      return recommendFromJson(jasonData);
-
-    }
     else{
-      return null;
-    }
-  }
-
-
-  Future<Webtoon?> fetchWebtoon(String webtoonTitle) async {
-    final response = await client.get(Uri.parse("http://3.39.22.234/WebToon/${webtoonTitle}"));
-
-    if(response.statusCode == 200){
-      var jsonData = response.body;
-
-      var webtoonData = webtoonFromJson(jsonData);
-      print(webtoonList);
-      return webtoonData;
-    }
-    else{
-      return null;
+      showToast("failed to get recommend list");
     }
   }
 

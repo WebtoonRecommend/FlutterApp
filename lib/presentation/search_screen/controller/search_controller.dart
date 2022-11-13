@@ -2,46 +2,44 @@ import '../../../data/controllers/heart_controller.dart';
 import '../../main_screen/controller/main_controller.dart';
 import '/core/app_export.dart';
 import 'package:application4/presentation/search_screen/models/search_model.dart';
-import 'package:http/http.dart' as http;
 import '../../../data/models/webtoon.dart';
 
 class SearchController extends GetxController {
   Rx<SearchModel> searchModelObj = SearchModel().obs;
   HeartController heartController = Get.find<HeartController>();
   MainController mainController = Get.find<MainController>();
+  Repository myRepository = Get.find<Repository>();
 
   String _searchText = "";
+  // 실질적인 검색 웹툰
+  var searches = <String>[].obs;
+  // api 통신용 검색 list
   var searchList = <Webtoon>[].obs;
-  static var client = http.Client();
 
+  /// 검색할 단어를 set
   void setSearchText(String searchtext){
     _searchText = searchtext;
   }
 
-  Future<void> fetchWebtoonList() async {
-    this.searchList.clear();
-    final response = await client.get(Uri.parse("http://3.39.22.234/WebToon/Search/$_searchText"));
+  /// text를 검색하여 나온 웹툰을 등록
+  updateSearchList() async {
+    this.searchList.value.clear();
+    this.searches.value.clear();
+    await _loadSearchList();
+  }
 
-    if(response.statusCode == 200){
-      var jsonData = response.body;
-      var webtoonListData = await webtoonFromJsonList(jsonData);
+  /// search text로 검색된 웹툰을 repository에 등록
+  Future<void> _loadSearchList() async{
+    var searches = await myRepository.fetchSearchedWebtoonList(this._searchText);
 
-      webtoonListData.forEach((webtoon) {
-        if (webtoon!=null) {
-          // mainController.webtoonList.add(webtoon);
-          this.searchList.add(webtoon);
-        }
-      });
-
-      print(webtoonListData);
-
+    if (searches != null){
+      this.searches.value = searches;
     }
     else{
-      print("${response.statusCode}");
-      print("${response.body}");
-      print("$_searchText");
+      showToast("failed to get search list");
     }
   }
+
   @override
   void onReady() {
     super.onReady();

@@ -1,17 +1,21 @@
-import 'dart:convert';
-
 import 'package:application4/core/app_export.dart';
 import 'package:application4/presentation/signup_screen/models/signup_model.dart';
 
-import 'package:http/http.dart' as http;
+import '../../../data/controllers/user_controller.dart';
 
 class SignupController extends GetxController {
   Rx<SignupModel> signupModelObj = SignupModel().obs;
   var userid;
   var userpasswd;
+
   // 0:중복확인버튼아직안누름, 1:id중복, 2:통과(id중복되지않음)
   RxInt isduplication = 0.obs;
 
+  Repository myRepository = Get.find<Repository>();
+  var userController = Get.find<UserController>();
+
+
+  // 회원정보 목록 및 선택 함수
 
   List<String> dropdownListAge = ['10대', '20대', '30대', '40대', '50대', '60대 이상'];
   String selectedDropdownAge = '10대';
@@ -37,50 +41,40 @@ class SignupController extends GetxController {
     update();
   }
 
+
+
+  /// 중복인지 확인하는 함수. 결과를 signup controller의 isduplication에 저장함
   isDuplication() async {
-    var data = {
-      "PassWd": "0"
-    };
-    var body = json.encode(data);
-    var response = await http.Client().post(
-        Uri.parse("http://3.39.22.234/User/${this.userid}"),
-        headers: {"Content-Type": "application/json"},
-        body: body
-    );
-    print("${response.body}");
-    if (int.parse(response.body) == 2)
+    bool isidexist = await userController.isIdExist("0");
+    if (!isidexist)
       this.isduplication.value = 2;
     else
       this.isduplication.value = 1;
   }
 
+  /// userid 등록 함수
+  setID(var userid) {
+    this.userid = userid;
+    this.userController.setID(userid);
+  }
+
+  /// 회원가입 정보를 서버에 등록하는 함수
   postUserData() async {
     var data = {
-    //   "ID": "123456",
-    // "PassWd": "1234",
-    // "Age":"1",
-    // "Job":"1",
-    // "Sex":"1"
     "ID": "${this.userid}",
     "PassWd": "${this.userpasswd}",
     "Age": "${dropdownListAge.indexWhere((idx) => idx == this.selectedDropdownAge)}",
     "Job": "${dropdownListJob.indexWhere((idx) => idx == this.selectedDropdownJob)}",
     "Sex": "${dropdownListGender.indexWhere((idx) => idx == this.selectedDropdownGender)}"
     };
-    var body = json.encode(data);
-    var response = await http.Client().post(
-        Uri.parse("http://3.39.22.234/User"),
-        headers: {"Content-Type": "application/json"},
-        body: body
-        );
-    if (response.statusCode == 200)
-      return true;
-    else {
-      // print("${dropdownListAge.indexWhere((idx) => idx == this.selectedDropdownAge)}");
-      print("${response.body}");
-      return false;
-    }
+    var isposted = await myRepository.postUserData(data);
+
+    var isupdated = await userController.updateUser(userid, userpasswd);
+    if (isposted && isupdated==0) return true;
+    else return false;
   }
+
+
 
   @override
   void onReady() {

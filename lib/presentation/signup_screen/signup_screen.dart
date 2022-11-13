@@ -1,16 +1,15 @@
-import 'package:application4/data/controllers/user_controller.dart';
 import 'package:application4/presentation/signup_screen/controller/signup_controller.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../theme/palette.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
+// 출처: Lirs Tech Tips - Youtube: https://youtu.be/FnXg0NK6hb8
 class SignupScreen extends GetWidget<SignupController> {
   @override
   Widget build(BuildContext context) {
-    final signupController = Get.put(SignupController());
+    final signupController = Get.put(SignupController(), permanent: true);
     final _formKey = GlobalKey<FormState>();
     String userPassword = '';
     String userName = '';
@@ -34,6 +33,7 @@ class SignupScreen extends GetWidget<SignupController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    // 나이 drop down button form
                     Container(
                       height: 80,
                       alignment: Alignment.centerRight,
@@ -105,6 +105,7 @@ class SignupScreen extends GetWidget<SignupController> {
                         ],
                       ),
                     ),
+                    // 성별 drop down button form
                     Container(
                       height: 80,
                       child: Row(
@@ -175,6 +176,7 @@ class SignupScreen extends GetWidget<SignupController> {
                         ],
                       ),
                     ),
+                    // 직업 drop down button form
                     Container(
                       height: 80,
                       child: Row(
@@ -247,6 +249,7 @@ class SignupScreen extends GetWidget<SignupController> {
                     SizedBox(
                       height: 30,
                     ),
+                    // 이메일 인증 버튼
                     TextButton.icon(
                       onPressed: () {
                         // TODO: 이메일 인증하기
@@ -268,22 +271,19 @@ class SignupScreen extends GetWidget<SignupController> {
                             children: [
                               Flexible(
                                 flex: 8,
+                                // 아이디 text form field
                                 child: TextFormField(
                                   key: ValueKey(1),
                                   validator: (value) {
-                                    /*
-                                                  * ID 유효성 판단:
-                                                  * server user에 존재하는지 판단
-                                                  * */
+                                    /**
+                                     * ID 유효성 판단:
+                                     * server user에 존재하는지 판단
+                                     * */
                                     if (value!.isEmpty || value.length < 4) {
                                       return 'Please enter at least 4 characters';
-                                    } else if (signupController
-                                            .isduplication.value ==
-                                        0) {
+                                    } else if (signupController.isduplication.value == 0) {
                                       return 'Please check the ID duplication';
-                                    } else if (signupController
-                                            .isduplication.value ==
-                                        1) {
+                                    } else if (signupController.isduplication.value == 1) {
                                       return 'duplicated ID!';
                                     }
                                     return null;
@@ -321,21 +321,16 @@ class SignupScreen extends GetWidget<SignupController> {
                                       contentPadding: EdgeInsets.all(10)),
                                 ),
                               ),
-                              Obx(
-                                () => Flexible(
+                              // 중복확인 버튼
+                              // signcontroller의 isduplication에 따라 색깔을 바꿈
+                              Obx(() => Flexible(
                                     flex: 2,
                                     child: OutlinedButton(
                                       style: OutlinedButton.styleFrom(
                                           side: BorderSide(
-                                              color: (signupController
-                                                          .isduplication
-                                                          .value ==
-                                                      1)
+                                              color: (signupController.isduplication.value == 1)
                                                   ? Colors.red
-                                                  : (signupController
-                                                              .isduplication
-                                                              .value ==
-                                                          2
+                                                  : (signupController.isduplication.value == 2
                                                       ? Colors.green
                                                       : Colors.black),
                                               width: 3)),
@@ -345,7 +340,7 @@ class SignupScreen extends GetWidget<SignupController> {
                                           showToast('Please enter at least 4 characters');
                                         }
                                         else{
-                                          signupController.userid = userName;
+                                          signupController.setID(userName);
                                           await signupController.isDuplication();
                                         }
                                       },
@@ -358,14 +353,15 @@ class SignupScreen extends GetWidget<SignupController> {
                           SizedBox(
                             height: 8,
                           ),
+                          // 패스워드 text form field
                           TextFormField(
                             obscureText: true,
                             key: ValueKey(4),
                             validator: (value) {
-                              /*
-                                            * passwd 유효성 판단:
-                                            * ID와 passwd가 일치하는지 판단
-                                            * */
+                              /**
+                               * passwd 유효성 판단:
+                               * passwd가 7자 이상인지 판단
+                               * */
                               if (value!.isEmpty || value.length < 6) {
                                 return 'Password must be at least 7 characters long.';
                               }
@@ -404,14 +400,15 @@ class SignupScreen extends GetWidget<SignupController> {
                           SizedBox(
                             height: 8,
                           ),
+                          // 패스워드 확인 text form field
                           TextFormField(
                             obscureText: true,
                             key: ValueKey(3),
                             validator: (value) {
-                              /*
-                                            * passwd 유효성 판단:
-                                            * ID와 passwd가 일치하는지 판단
-                                            * */
+                              /**
+                               * passwd 유효성 판단:
+                               * passwd가 확인용 passwd와 일치하는지 판단
+                               * */
                               if (value != userPassword) {
                                 return 'Please confirm password.';
                               }
@@ -460,24 +457,21 @@ class SignupScreen extends GetWidget<SignupController> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          // 가입하기 버튼
                           TextButton.icon(
                             onPressed: () async {
+                              // 각 form에서 기재하지 않은 것이 있는지 확인
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                /*
-                                서버로 개인정보 보내기
-                                */
+
+                                //서버로 개인정보 보내기
                                 signupController.userpasswd = userPassword;
-                                bool isusercreated =
-                                    await signupController.postUserData();
+                                bool isusercreated = await signupController.postUserData();
                                 if (isusercreated) {
-                                  var userController =
-                                      Get.find<UserController>();
-                                  userController.updateID(userName);
-                                  bool isuserfound =
-                                      await userController.updateUser();
-                                  if (isuserfound) {
-                                    Get.offAllNamed(AppRoutes.keywordselectionScreen, arguments: userName);
+                                  signupController.setID(userName);
+                                  bool isidExist = await signupController.userController.isIdExist("");
+                                  if (isidExist) {
+                                    onTapBtnSignup();
                                   } else {
                                     showToast("Sorry, user not found.\n"
                                         "try again.");
@@ -487,7 +481,6 @@ class SignupScreen extends GetWidget<SignupController> {
                                       "try again.");
                                 }
                               }
-                              // onTapBtnLogin();
                             },
                             style: TextButton.styleFrom(
                                 foregroundColor: Colors.white,
@@ -511,12 +504,7 @@ class SignupScreen extends GetWidget<SignupController> {
     );
   }
 
-}
-
-void showToast(String message) {
-  Fluttertoast.showToast(
-      msg: message,
-      backgroundColor: Colors.blueGrey,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM);
+  onTapBtnSignup() {
+    Get.offAllNamed(AppRoutes.keywordselectionScreen);
+  }
 }

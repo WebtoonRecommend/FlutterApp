@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-// For checking internet connectivity
+// TODO: For checking internet connectivity
 abstract class NetworkInfoI {
   Future<bool> isConnected();
 
