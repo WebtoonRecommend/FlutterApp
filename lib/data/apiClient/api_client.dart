@@ -9,6 +9,7 @@ import 'package:application4/data/models/recommend.dart';
 import 'package:application4/data/models/webtoon.dart';
 
 
+/// api 통신 담당자
 class ApiClient {
   static var client = http.Client();
   static const baseUrl = Constants.baseUrl;
@@ -26,8 +27,12 @@ class ApiClient {
 
 
 
-  //api 결과값에 개행문자 붙여서 나옴
+  // api 결과값에 개행문자 붙여서 나옴
 
+  // 함수의 이름은 api 명에서 따옴
+  // 예를 들어, postUserwithUserid는 http://ipAdress/User/userid 요청을 함
+
+  /// User/userid post api
   postUserwithUserid(String passwd) async {
     // id, pw가 일치하는지 확인
     print("postUserapi-$userid,$passwd");
@@ -43,6 +48,7 @@ class ApiClient {
     return response.body.substring(0,response.body.length-1);
   }
 
+  /// User/userid get api
   Future<User?> getUserwithUserid() async {
     var response = await client.get(
       Uri.parse("${baseUrl}/User/${userid}"),
@@ -60,6 +66,7 @@ class ApiClient {
     }
   }
 
+  /// Recommended/userid get api
   Future<List<Recommend>?> getRecommendedwithUserid() async {
     var response = await client.get(
       Uri.parse("${baseUrl}/Recommended/${userid}"),
@@ -77,6 +84,7 @@ class ApiClient {
     }
   }
 
+  /// Webtoon/webtoonTitle get api
   Future<Webtoon?> getWebToonwithTitle(String webtoonTitle) async {
     var response = await client.get(
       Uri.parse("${baseUrl}/WebToon/${webtoonTitle}"),
@@ -97,6 +105,7 @@ class ApiClient {
     }
   }
 
+  /// BookMark/userid get api
   Future<List<Bookmark>?> getBookMarkwithUserid() async{
     var response = await client.get(
       Uri.parse("${baseUrl}/BookMark/${userid}"),
@@ -114,6 +123,7 @@ class ApiClient {
     }
   }
 
+  /// BookMark/userid/webtoon delete api
   Future<bool> deleteBookMarkwithUseridandTitle(String webtoon) async {
     var response = await client.delete(
       Uri.parse("${baseUrl}/BookMark/${userid}/${webtoon}"),
@@ -128,6 +138,7 @@ class ApiClient {
     }
   }
 
+  /// BookMark post api
   Future<bool> postBookMark(String webtoon) async {
     var data = {
       "UID": this.userid,
@@ -149,7 +160,7 @@ class ApiClient {
   }
 
 
-  /// get search webtoon with jwt
+  /// WebToon/Search/searchText get webtoon
   Future<List<Webtoon>?> getWebtoonSearchwithSearchText(String searchText) async {
     var response = await client.get(
       Uri.parse("${baseUrl}/WebToon/Search/$searchText"),
@@ -173,7 +184,7 @@ class ApiClient {
 
 
 
-  /// user post api
+  /// User post api
   postUser(var data) async {
     var body = json.encode(data);
     var response = await http.Client().post(
@@ -191,7 +202,7 @@ class ApiClient {
   }
 
 
-  /// keyword post api
+  /// KeyWords post api
   postKeyWords(var data) async{
     var body = json.encode(data);
 

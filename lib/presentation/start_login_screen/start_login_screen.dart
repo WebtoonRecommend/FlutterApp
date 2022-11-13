@@ -8,6 +8,7 @@ import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+// 출처: 코딩셰프 - Youtube: https://youtu.be/WqTeell2Tps
 class StartLoginScreen extends GetWidget<StartLoginController> {
   bool isSignupScreen = true;
   bool showSpinner = false;
@@ -42,6 +43,7 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
+                                    // 웹튠 로고
                                     Padding(
                                         padding: getPadding(left: 20, right: 20),
                                         child: Text("lbl_webtune".tr,
@@ -49,6 +51,7 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                             textAlign: TextAlign.left,
                                             style: AppStyle.txtInterBold30
                                                 .copyWith())),
+                                    // 로그인 로고
                                     Center(
                                       child: Text(
                                         'LOGIN',
@@ -64,12 +67,14 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                         key: _formKey,
                                         child: Column(
                                           children: [
+                                            // id 입력창
                                             TextFormField(
                                               key: ValueKey(1),
                                               validator: (value) {
-                                                /*
+                                                /**
                                                 * ID 유효성 판단:
-                                                * server user에 존재하는지 판단
+                                                * 입력한 ID가 4자 이상인지 판단
+                                                 * server user에 존재하는지 판단
                                                 * */
                                                 if (value!.isEmpty ||
                                                     value.length < 4) {
@@ -118,14 +123,16 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                             SizedBox(
                                               height: 8,
                                             ),
+                                            // passwd 입력창
                                             TextFormField(
                                               obscureText: true,
                                               key: ValueKey(3),
                                               validator: (value) {
-                                                /*
-                                                * passwd 유효성 판단:
-                                                * ID와 passwd가 일치하는지 판단
-                                                * */
+                                                /**
+                                                 * passwd 유효성 판단:
+                                                 * passwd가 7자 이상인지 판단
+                                                 * ID와 passwd가 일치하는지 판단
+                                                 * */
                                                 if (value!.isEmpty ||
                                                     value.length < 6) {
                                                   return 'Password must be at least 7 characters long.';
@@ -185,7 +192,7 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                                 BorderRadius.circular(50)),
                                         child: GestureDetector(
                                           onTap: () async {
-                                            // ID, passwd 확인된다면
+                                            // ID, passwd 유효하다면 로그인 진행
                                             if (_formKey.currentState!.validate()) {
 
                                               _formKey.currentState!.save();
@@ -248,7 +255,6 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                         ),
                                       ),
                                     ),
-                                    //전송버튼
                                     Padding(
                                         padding: getPadding(
                                             left: 20, top: 40, right: 20),
@@ -259,6 +265,7 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                                 CrossAxisAlignment.center,
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
+                                              // 회원가입 버튼
                                               ElevatedButton(
                                                   onPressed: onTapBtnSignup,
                                                   style: ElevatedButton.styleFrom(
@@ -272,6 +279,7 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                                       color: Colors.white,
                                                     ),
                                                   )),
+                                              // id,pw찾기 버튼
                                               ElevatedButton(
                                                   onPressed: () {
                                                     showToast(

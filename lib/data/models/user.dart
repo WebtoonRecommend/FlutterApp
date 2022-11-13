@@ -21,7 +21,10 @@ class User {
   dynamic sex;
   dynamic token;
 
+
+  /// json to User class 함수
   factory User.fromJson(Map<String, dynamic> json) => User(
+    // repository에서 id, token 가져옴
     ID: Get.find<Repository>().userid,
     age: json["Age"],
     job: json["Job"],
@@ -29,6 +32,7 @@ class User {
     token: Get.find<Repository>().token,
   );
 
+  /// User class to json 함수
   Map<String, dynamic> toJson() => {
     "Age": age,
     "Job": job,

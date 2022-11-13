@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 class AppSettingScreen extends GetWidget<AppSettingController> {
   @override
   Widget build(BuildContext context) {
-    AppSettingController controller = Get.put(AppSettingController(), permanent: true); // Instantiate Get Controller, *in* build()
+    // AppSettingController controller = Get.put(AppSettingController(), permanent: true); // Instantiate Get Controller, *in* build()
 
     return SafeArea(
       child: Scaffold(
@@ -58,6 +58,8 @@ class AppSettingScreen extends GetWidget<AppSettingController> {
                 // buildNotificationOption(controller,"Account Active", controller.on2, controller.toggle2),
                 // buildNotificationOption(controller,"Oppertunity", controller.on3, controller.toggle3),
                 // Obx will rebuild Text & Switch when "on" observable changes
+
+                // logout 버튼
                 Center(
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(

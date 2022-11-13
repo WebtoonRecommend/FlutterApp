@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final bookmark = bookmarkFromJson(jsonString);
-
 import 'dart:convert';
 
 List<Bookmark> bookmarkFromJson(String str) => List<Bookmark>.from(json.decode(str).map((x) => Bookmark.fromJson(x)));
@@ -19,12 +15,14 @@ class Bookmark {
   String uid;
   String webtoonTitle;
 
+  /// json to Bookmark class 함수
   factory Bookmark.fromJson(Map<String, dynamic> json) => Bookmark(
     id: json["ID"],
     uid: json["UID"],
     webtoonTitle: json["WebtoonTitle"],
   );
 
+  /// Bookmark class to json 함수
   Map<String, dynamic> toJson() => {
     "ID": id,
     "UID": uid,

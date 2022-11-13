@@ -1,11 +1,12 @@
-import '../../data/controllers/heart_controller.dart';
 import '../../data/controllers/user_controller.dart';
 import '../../widgets/webtoon_preview.dart';
+import '../../data/controllers/heart_controller.dart';
 import '../main_screen/controller/main_controller.dart';
 import 'controller/search_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 
+// 출처: A Goodman - Article : https://www.kindacode.com/article/flutter-add-a-search-field-to-the-app-bar/
 class SearchScreen extends GetWidget<SearchController> {
   final fieldText = TextEditingController();
   String searchText = "";

@@ -1,6 +1,6 @@
 import 'package:application4/core/app_export.dart';
 
-
+/// 앱을 시작시 생성되는 인스턴스 목록
 class InitialBindings extends Bindings {
   @override
   void dependencies() {

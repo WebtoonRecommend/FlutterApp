@@ -7,10 +7,13 @@ import 'package:application4/data/apiClient/api_client.dart';
 
 /// instance 저장하는 친구
 class Repository {
+  // api 요원
   final ApiClient apiClient = ApiClient();
 
+  // userid 및 token
   var userid = "";
   var token = "";
+  // webtoon을 저장하는 map이다. key: String, value: Webtoon
   var webtoonList= Map<String, Webtoon>();
 
 
