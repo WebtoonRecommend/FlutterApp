@@ -63,13 +63,13 @@ class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
                           Scatter(
                             fillGaps: false,
                             delegate: ArchimedeanSpiralScatterDelegate(ratio: ratio,a: 5, b: 30),
-                            children: widgets.sublist(7,14),
+                            children: widgets.sublist(7,13),
                           ),
-                          Scatter(
-                            fillGaps: false,
-                            delegate: ArchimedeanSpiralScatterDelegate(ratio: ratio,a: 5, b: 30),
-                            children: widgets.sublist(14,21),
-                          ),
+                          // Scatter(
+                          //   fillGaps: false,
+                          //   delegate: ArchimedeanSpiralScatterDelegate(ratio: ratio,a: 5, b: 30),
+                          //   children: widgets.sublist(14,21),
+                          // ),
                           // 선택한 키워드를 리스트로 보여줌 (디버깅용)
                           Obx(()=>Offstage(
                               // obx 함수가 Rx variable in the root scope of the callback의 변화만 탐지하기 때문에 새로 만들어줌
