@@ -6,26 +6,22 @@ String recommendToJson(List<Recommend> data) => json.encode(List<dynamic>.from(d
 
 class Recommend {
   Recommend({
-    required this.id,
-    required this.uid,
+    required this.star,
     required this.webtoonTitle,
   });
 
-  int id;
-  String uid;
+  String star;
   String webtoonTitle;
 
   /// json to Recommend class 함수
-  factory Recommend.fromJson(Map<String, dynamic> json) => Recommend(
-    id: json["ID"],
-    uid: json["UID"],
-    webtoonTitle: json["WebtoonTitle"],
+  factory Recommend.fromJson(List<dynamic> json) => Recommend(
+    star: json[0],
+    webtoonTitle: json[1],
   );
 
   /// Recommend class to json 함수
   Map<String, dynamic> toJson() => {
-    "ID": id,
-    "UID": uid,
+    "star": star,
     "WebtoonTitle": webtoonTitle,
   };
 }
