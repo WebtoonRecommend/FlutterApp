@@ -12,8 +12,8 @@ class SearchScreen extends GetWidget<SearchController> {
   String searchText = "";
 
   final userController = Get.find<UserController>();
-  HeartController heartController = Get.find<HeartController>();
-  MainController mainController = Get.find<MainController>();
+  final HeartController heartController = Get.find<HeartController>();
+  final MainController mainController = Get.find<MainController>();
 
   @override
   Widget build(BuildContext context) {

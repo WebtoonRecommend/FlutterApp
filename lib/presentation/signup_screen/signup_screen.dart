@@ -1,6 +1,6 @@
 import 'package:application4/presentation/signup_screen/controller/signup_controller.dart';
 
-import '../../theme/palette.dart';
+import 'package:application4/theme/palette.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -92,6 +92,9 @@ class SignupScreen extends GetWidget<SignupController> {
                                 if (value == null) {
                                   return 'Please select age.';
                                 }
+                                else{
+                                  return null;
+                                }
                               },
                               onChanged: (dynamic value) {
                                 //Do something when changing the item if you want.
@@ -163,6 +166,9 @@ class SignupScreen extends GetWidget<SignupController> {
                                 if (value == null) {
                                   return 'Please select gender.';
                                 }
+                                else{
+                                  return null;
+                                }
                               },
                               onChanged: (dynamic value) {
                                 //Do something when changing the item if you want.
@@ -233,6 +239,9 @@ class SignupScreen extends GetWidget<SignupController> {
                               validator: (value) {
                                 if (value == null) {
                                   return 'Please select Job.';
+                                }
+                                else{
+                                  return null;
                                 }
                               },
                               onChanged: (value) {

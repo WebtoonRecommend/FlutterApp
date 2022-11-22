@@ -1,4 +1,4 @@
-import '/core/app_export.dart';
+import 'package:application4/core/app_export.dart';
 import 'package:application4/presentation/bookmark_screen/models/bookmark_model.dart';
 
 class BookmarkController extends GetxController {

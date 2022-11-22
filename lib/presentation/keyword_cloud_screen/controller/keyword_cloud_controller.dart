@@ -1,4 +1,4 @@
-import '/core/app_export.dart';
+import 'package:application4/core/app_export.dart';
 import 'package:application4/presentation/keyword_cloud_screen/models/keyword_cloud_model.dart';
 
 class KeywordCloudController extends GetxController {

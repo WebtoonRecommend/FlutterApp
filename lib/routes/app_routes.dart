@@ -1,35 +1,19 @@
 import 'package:application4/presentation/start_login_screen/start_login_screen.dart';
 import 'package:application4/presentation/start_login_screen/binding/start_login_binding.dart';
-import 'package:application4/presentation/find_idpw_screen/find_idpw_screen.dart';
-import 'package:application4/presentation/find_idpw_screen/binding/find_idpw_binding.dart';
 import 'package:application4/presentation/app_setting_screen/app_setting_screen.dart';
 import 'package:application4/presentation/app_setting_screen/binding/app_setting_binding.dart';
 import 'package:application4/presentation/signup_screen/signup_screen.dart';
 import 'package:application4/presentation/signup_screen/binding/signup_binding.dart';
-import 'package:application4/presentation/android_large_four_screen/android_large_four_screen.dart';
-import 'package:application4/presentation/android_large_four_screen/binding/android_large_four_binding.dart';
-import 'package:application4/presentation/round_select_screen/round_select_screen.dart';
-import 'package:application4/presentation/round_select_screen/binding/round_select_binding.dart';
-import 'package:application4/presentation/selection_screen/selection_screen.dart';
-import 'package:application4/presentation/selection_screen/binding/selection_binding.dart';
-import 'package:application4/presentation/worldcup_screen/worldcup_screen.dart';
-import 'package:application4/presentation/worldcup_screen/binding/worldcup_binding.dart';
 import 'package:application4/presentation/keyword_cloud_screen/keyword_cloud_screen.dart';
 import 'package:application4/presentation/keyword_cloud_screen/binding/keyword_cloud_binding.dart';
 import 'package:application4/presentation/bookmark_screen/bookmark_screen.dart';
 import 'package:application4/presentation/bookmark_screen/binding/bookmark_binding.dart';
 import 'package:application4/presentation/detail_screen/detail_screen.dart';
 import 'package:application4/presentation/detail_screen/binding/detail_binding.dart';
-import 'package:application4/presentation/detailtwo_screen/detailtwo_screen.dart';
-import 'package:application4/presentation/detailtwo_screen/binding/detailtwo_binding.dart';
 import 'package:application4/presentation/keyword_selection_screen/keyword_selection_screen.dart';
 import 'package:application4/presentation/keyword_selection_screen/binding/keyword_selection_binding.dart';
-import 'package:application4/presentation/main_gallery_screen/main_gallery_screen.dart';
-import 'package:application4/presentation/main_gallery_screen/binding/main_gallery_binding.dart';
 import 'package:application4/presentation/main_screen/main_screen.dart';
 import 'package:application4/presentation/main_screen/binding/main_binding.dart';
-import 'package:application4/presentation/main_card_screen/main_card_screen.dart';
-import 'package:application4/presentation/main_card_screen/binding/main_card_binding.dart';
 import 'package:application4/presentation/search_screen/search_screen.dart';
 import 'package:application4/presentation/search_screen/binding/search_binding.dart';
 import 'package:application4/presentation/app_navigation_screen/app_navigation_screen.dart';
@@ -84,13 +68,6 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: findIdpwScreen,
-      page: () => FindIdpwScreen(),
-      bindings: [
-        FindIdpwBinding(),
-      ],
-    ),
-    GetPage(
       name: appSettingScreen,
       page: () => AppSettingScreen(),
       bindings: [
@@ -102,34 +79,6 @@ class AppRoutes {
       page: () => SignupScreen(),
       bindings: [
         SignupBinding(),
-      ],
-    ),
-    GetPage(
-      name: androidLargeFourScreen,
-      page: () => AndroidLargeFourScreen(),
-      bindings: [
-        AndroidLargeFourBinding(),
-      ],
-    ),
-    GetPage(
-      name: roundSelectScreen,
-      page: () => RoundSelectScreen(),
-      bindings: [
-        RoundSelectBinding(),
-      ],
-    ),
-    GetPage(
-      name: selectionScreen,
-      page: () => SelectionScreen(),
-      bindings: [
-        SelectionBinding(),
-      ],
-    ),
-    GetPage(
-      name: worldcupScreen,
-      page: () => WorldcupScreen(),
-      bindings: [
-        WorldcupBinding(),
       ],
     ),
     GetPage(
@@ -154,13 +103,6 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: detailtwoScreen,
-      page: () => DetailtwoScreen(),
-      bindings: [
-        DetailtwoBinding(),
-      ],
-    ),
-    GetPage(
       name: keywordselectionScreen,
       page: () => KeywordSelectionScreen(),
       bindings: [
@@ -168,24 +110,10 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: mainGalleryScreen,
-      page: () => MainGalleryScreen(),
-      bindings: [
-        MainGalleryBinding(),
-      ],
-    ),
-    GetPage(
       name: mainScreen,
       page: () => MainScreen(),
       bindings: [
         MainBinding(),
-      ],
-    ),
-    GetPage(
-      name: mainCardScreen,
-      page: () => MainCardScreen(),
-      bindings: [
-        MainCardBinding(),
       ],
     ),
     GetPage(

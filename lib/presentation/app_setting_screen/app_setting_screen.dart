@@ -1,11 +1,10 @@
 import 'package:application4/presentation/bookmark_screen/controller/bookmark_controller.dart';
 import 'package:application4/presentation/signup_screen/controller/signup_controller.dart';
-import 'package:flutter/cupertino.dart';
 
-import '../../data/controllers/heart_controller.dart';
-import '../../data/controllers/user_controller.dart';
-import '../main_screen/controller/main_controller.dart';
-import 'controller/app_setting_controller.dart';
+import 'package:application4/data/controllers/heart_controller.dart';
+import 'package:application4/data/controllers/user_controller.dart';
+import 'package:application4/presentation/main_screen/controller/main_controller.dart';
+import 'package:application4/presentation/app_setting_screen/controller/app_setting_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 

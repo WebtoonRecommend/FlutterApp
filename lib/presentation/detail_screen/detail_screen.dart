@@ -1,7 +1,7 @@
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../data/controllers/heart_controller.dart';
-import 'controller/detail_controller.dart';
+import 'package:application4/data/controllers/heart_controller.dart';
+import 'package:application4/presentation/detail_screen/controller/detail_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:application4/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
