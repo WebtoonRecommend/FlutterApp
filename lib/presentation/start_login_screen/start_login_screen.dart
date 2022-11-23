@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:application4/data/controllers/user_controller.dart';
 
-import '../../theme/palette.dart';
-import 'controller/start_login_controller.dart';
+import 'package:application4/theme/palette.dart';
+import 'package:application4/presentation/start_login_screen/controller/start_login_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';

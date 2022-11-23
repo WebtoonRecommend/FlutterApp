@@ -1,4 +1,4 @@
-import '/core/app_export.dart';
+import 'package:application4/core/app_export.dart';
 import 'package:application4/presentation/start_login_screen/models/start_login_model.dart';
 
 class StartLoginController extends GetxController {

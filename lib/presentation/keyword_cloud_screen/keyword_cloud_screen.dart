@@ -1,10 +1,10 @@
-import '../../widgets/scatter_item.dart';
-import 'controller/keyword_cloud_controller.dart';
+import 'package:application4/widgets/scatter_item.dart';
+import 'package:application4/presentation/keyword_cloud_screen/controller/keyword_cloud_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scatter/flutter_scatter.dart';
 
-import '../../data/models/flutter_hashtags.dart';
+import 'package:application4/data/models/flutter_hashtags.dart';
 
 class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
   final keywordCloudController = Get.put(KeywordCloudController());

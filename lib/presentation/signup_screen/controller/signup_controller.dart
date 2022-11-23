@@ -1,7 +1,7 @@
 import 'package:application4/core/app_export.dart';
 import 'package:application4/presentation/signup_screen/models/signup_model.dart';
 
-import '../../../data/controllers/user_controller.dart';
+import 'package:application4/data/controllers/user_controller.dart';
 
 class SignupController extends GetxController {
   Rx<SignupModel> signupModelObj = SignupModel().obs;

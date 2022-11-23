@@ -1,9 +1,9 @@
 import 'package:application4/data/controllers/user_controller.dart';
 
-import '../../data/controllers/heart_controller.dart';
-import '../../widgets/webtoon_preview.dart';
-import '../bookmark_screen/controller/bookmark_controller.dart';
-import 'controller/main_controller.dart';
+import 'package:application4/data/controllers/heart_controller.dart';
+import 'package:application4/widgets/webtoon_preview.dart';
+import 'package:application4/presentation/bookmark_screen/controller/bookmark_controller.dart';
+import 'package:application4/presentation/main_screen/controller/main_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';

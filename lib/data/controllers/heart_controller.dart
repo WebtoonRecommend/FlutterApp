@@ -1,6 +1,6 @@
 import 'package:application4/core/app_export.dart';
 import 'package:application4/presentation/main_screen/controller/main_controller.dart';
-import '../../data/models/bookmark.dart';
+import 'package:application4/data/models/bookmark.dart';
 
 class HeartController extends GetxController{
   // 실질적인 즐겨찾기 웹툰 목록

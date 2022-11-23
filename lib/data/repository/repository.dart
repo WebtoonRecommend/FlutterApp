@@ -1,8 +1,8 @@
 import 'package:application4/data/models/user.dart';
 
-import '../models/bookmark.dart';
-import '../models/recommend.dart';
-import '../models/webtoon.dart';
+import 'package:application4/data/models/bookmark.dart';
+import 'package:application4/data/models/recommend.dart';
+import 'package:application4/data/models/webtoon.dart';
 import 'package:application4/data/apiClient/api_client.dart';
 
 /// instance 저장하는 친구

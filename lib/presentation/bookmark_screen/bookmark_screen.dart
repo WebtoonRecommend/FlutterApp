@@ -2,7 +2,7 @@ import 'package:application4/data/controllers/heart_controller.dart';
 import 'package:application4/data/models/webtoon.dart';
 import 'package:application4/presentation/main_screen/controller/main_controller.dart';
 
-import 'controller/bookmark_controller.dart';
+import 'package:application4/presentation/bookmark_screen/controller/bookmark_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 

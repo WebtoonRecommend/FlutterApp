@@ -1,4 +1,4 @@
-import 'controller/keyword_selection_controller.dart';
+import 'package:application4/presentation/keyword_selection_screen/controller/keyword_selection_controller.dart';
 import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 

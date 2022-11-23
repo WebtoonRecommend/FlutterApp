@@ -1,6 +1,6 @@
-import '/core/app_export.dart';
+import 'package:application4/core/app_export.dart';
 import 'package:application4/presentation/main_screen/models/main_model.dart';
-import '../../../data/models/recommend.dart';
+import 'package:application4/data/models/recommend.dart';
 
 class MainController extends GetxController {
   Rx<MainTwoModel> mainTwoModelObj = MainTwoModel().obs;
