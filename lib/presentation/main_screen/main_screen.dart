@@ -24,6 +24,15 @@ class MainScreen extends GetWidget<MainController> {
             appBar: AppBar(
               title: Text("main"),
               centerTitle: true,
+              // 갱신 버튼
+              leading:
+                IconButton(
+                  icon: Icon(Icons.refresh),
+                  onPressed: () {
+                    // 서버로부터 추천을 다시 받는다.
+                    mainController.updateRecommendWeboons();
+                  },
+                ),
               actions: [
                 // 검색 버튼
                 IconButton(
@@ -89,24 +98,18 @@ class MainScreen extends GetWidget<MainController> {
                             itemCount: mainController.recomms.length,
                             itemBuilder: (context, index) {
                               String webtoonTitle = mainController.recomms[index];
-                              return Offstage(
-                                // 이미 즐겨찾기된 웹툰이면 보여주지 않음
-                                offstage: heartController.hearts.contains(webtoonTitle),
-                                // 웹툰 preview 위젯
-                                child: WebtoonPreview(
-                                  // 하트 버튼 처리 함수
-                                  onPressed: (){
-                                    if (heartController.hearts.contains(webtoonTitle)) {
-                                      heartController.breakHeartToWebtoon(webtoonTitle);
-                                    } else {
-                                      heartController.heartToWebtoon(webtoonTitle);
-                                    }},
-                                  webtoonTitle: webtoonTitle,
-                                  myRepository: myRepository,
-                                  // 즐겨찾기된 웹툰이면 하트를 채움
-                                  isbookmark: heartController.hearts.any((title) => title == webtoonTitle),
-                                ),
-                              //  속이 뻥~
+                              return WebtoonPreview(
+                                // 하트 버튼 처리 함수
+                                onPressed: (){
+                                  if (heartController.hearts.contains(webtoonTitle)) {
+                                    heartController.breakHeartToWebtoon(webtoonTitle);
+                                  } else {
+                                    heartController.heartToWebtoon(webtoonTitle);
+                                  }},
+                                webtoonTitle: webtoonTitle,
+                                myRepository: myRepository,
+                                // 즐겨찾기된 웹툰이면 하트를 채움
+                                isbookmark: heartController.hearts.any((title) => title == webtoonTitle),
                               );
                             }),
                       ),

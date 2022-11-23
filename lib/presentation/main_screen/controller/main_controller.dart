@@ -25,6 +25,9 @@ class MainController extends GetxController {
 
   /// 추천 웹툰을 등록하는 함수
   updateRecommendWeboons() async{
+    // 추천 refresh시 이전 추천 목록을 지운다.
+    recommendList.value.clear();
+    recomms.value.clear();
     // recommend된 webtoon 데이터만 가져옴
     await _loadRecommendList();
     recommendList.value.forEach((element) async {
