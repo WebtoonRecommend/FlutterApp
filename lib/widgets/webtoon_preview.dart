@@ -96,8 +96,11 @@ class WebtoonPreview extends StatelessWidget{
                               itemSize: 20.0,
                               direction: Axis.horizontal,
                             ),
-                            // 웹툰 설명(20자)
+                            // 웹툰 설명(20자 이내)
                             Text(
+                                (webtoon.webtoonDescription.length<20)?
+                                    '${webtoon.webtoonDescription.replaceAll('\n', ' ')}'
+                                    :
                                 '${webtoon.webtoonDescription.replaceAll('\n', ' ').substring(0,20)}'+"..."),
                             // Text(
                             //     '${heartController.hearts}'),
