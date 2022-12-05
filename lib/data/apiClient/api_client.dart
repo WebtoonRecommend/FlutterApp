@@ -16,12 +16,18 @@ class ApiClient {
 
   var userid = "";
   var token = "";
+  var passwd = "";
+  // TODO: 추천만료
+  var days = "0";
 
   setUserid(String userid) {
     this.userid = userid;
   }
   setToken(String token) {
     this.token = token;
+  }
+  setPasswd(String passwd){
+    this.passwd = passwd;
   }
 
   printResponse(var response){
@@ -69,8 +75,8 @@ class ApiClient {
     }
   }
 
-  /// Recommended/userid get api
-  Future<List<Recommend>?> getRecommendedwithUserid() async {
+  /// Recommended get api
+  Future<List<Recommend>?> getRecommended() async {
     var response = await client.get(
       Uri.parse("${baseUrl}/Recommended/${days}"),
       headers: {"Content-Type": "application/json",
@@ -106,8 +112,8 @@ class ApiClient {
     }
   }
 
-  /// BookMark/userid get api
-  Future<List<Bookmark>?> getBookMarkwithUserid() async{
+  /// BookMark get api
+  Future<List<Bookmark>?> getBookMark() async{
     var response = await client.get(
       Uri.parse("${baseUrl}/BookMark"),
       headers: {"Content-Type": "application/json",
@@ -123,10 +129,10 @@ class ApiClient {
     }
   }
 
-  /// BookMark/userid/webtoon delete api
-  Future<bool> deleteBookMarkwithUseridandTitle(String webtoon) async {
+  /// BookMark/webtoon delete api
+  Future<bool> deleteBookMarkwithTitle(String webtoon) async {
     var response = await client.delete(
-      Uri.parse("${baseUrl}/BookMark/${userid}/${webtoon}"),
+      Uri.parse("${baseUrl}/BookMark/${webtoon}"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
