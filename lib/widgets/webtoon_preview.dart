@@ -43,7 +43,7 @@ class WebtoonPreview extends StatelessWidget{
             Row(
               mainAxisAlignment:
               MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Flexible(
                   flex: 5,
@@ -86,15 +86,20 @@ class WebtoonPreview extends StatelessWidget{
                             Text(
                                 '${webtoon.webtoonist}'),
                             // 웹툰 별점
-                            RatingBarIndicator(
-                              rating: double.parse(webtoon.webtoonStarRating)/2,
-                              itemBuilder: (context, index) => Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              ),
-                              itemCount: 5,
-                              itemSize: 20.0,
-                              direction: Axis.horizontal,
+                            Row(
+                              children: [
+                                RatingBarIndicator(
+                                  rating: double.parse(webtoon.webtoonStarRating)/2,
+                                  itemBuilder: (context, index) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  itemCount: 5,
+                                  itemSize: 20.0,
+                                  direction: Axis.horizontal,
+                                ),
+                                Text("   ${webtoon.webtoonStarRating}")
+                              ],
                             ),
                             // 웹툰 설명(20자 이내)
                             Text(

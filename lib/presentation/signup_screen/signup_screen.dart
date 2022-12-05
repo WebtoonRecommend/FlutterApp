@@ -354,7 +354,11 @@ class SignupScreen extends GetWidget<SignupController> {
                                         }
                                       },
                                       child: Text(
-                                          "${signupController.isduplication.value}"),
+                                          (signupController.isduplication.value == 1)
+                                              ? "X"
+                                              : (signupController.isduplication.value == 2
+                                              ? "O"
+                                              : "중복\n확인")),
                                     )),
                               )
                             ],
