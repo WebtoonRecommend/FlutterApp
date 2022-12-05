@@ -1,3 +1,5 @@
+import 'package:application4/data/models/webtoon.dart';
+import 'package:application4/widgets/item_indicator_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:application4/data/controllers/heart_controller.dart';
@@ -7,10 +9,12 @@ import 'package:application4/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../widgets/item_indicator_string.dart';
+
 class DetailScreen extends GetWidget<DetailController> {
   @override
   Widget build(BuildContext context) {
-    final webtoon = Get.arguments;
+    Webtoon webtoon = Get.arguments;
     final heartController = Get.find<HeartController>();
 
     return SafeArea(
@@ -103,23 +107,23 @@ class DetailScreen extends GetWidget<DetailController> {
                                           : Icons.favorite_border),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: getPadding(
-                                      left: 11,
-                                      top: 1,
-                                      right: 11,
-                                      bottom: 4,
-                                    ),
-                                    // 하트 수
-                                    child: Text(
-                                      "lbl_77".tr,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.left,
-                                      style: AppStyle
-                                          .txtInknutAntiquaLight12
-                                          .copyWith(),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: getPadding(
+                                  //     left: 11,
+                                  //     top: 1,
+                                  //     right: 11,
+                                  //     bottom: 4,
+                                  //   ),
+                                  //   // 하트 수
+                                  //   child: Text(
+                                  //     "lbl_77".tr,
+                                  //     overflow: TextOverflow.ellipsis,
+                                  //     textAlign: TextAlign.left,
+                                  //     style: AppStyle
+                                  //         .txtInknutAntiquaLight12
+                                  //         .copyWith(),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -155,120 +159,38 @@ class DetailScreen extends GetWidget<DetailController> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 50,),
                     // 작가
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: getPadding(
-                          left: 34,
-                          top: 46,
-                          right: 34,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: getPadding(
-                                bottom: 1,
-                              ),
-                              child: Text(
-                                "lbl26".tr,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtInterExtraLight25
-                                    .copyWith(),
-                              ),
-                            ),
-                            // SizedBox(width: 50,),
-                            Container(
-                              alignment: Alignment.center,
-                              width: 200,
-                              child:
-                                  webtoon.webtoonist.length <= 5 ?
-                              (Text(
-                                  "${webtoon.webtoonist}",
-                                  style: TextStyle(fontSize: 20),
-                              )) :
-                                (FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  "${webtoon.webtoonist}",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ))
-
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ),
+                    ItemIndicatorString(itemName: "작가", itemValue: "${webtoon.webtoonist}",),
+                    SizedBox(height: 10,),
                     // 별점
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: getPadding(
-                          left: 19,
-                          top: 27,
-                          right: 19,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: getPadding(
-                                top: 2,
-                                bottom: 2,
-                              ),
-                              child: Text(
-                                "lbl27".tr,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.left,
-                                style: AppStyle.txtInterExtraLight25
-                                    .copyWith(),
-                              ),
+                    ItemIndicatorWidget(itemName: "웹튠 평점",
+                      itemValue: Column(
+                        children: [
+                          RatingBarIndicator(
+                            rating: double.parse(webtoon.webtoonStarRating)/2,
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
                             ),
-                            Padding(
-                              padding: getPadding(
-                                left: 56,
-                                bottom: 7,
-                              ),
-                              child: RatingBarIndicator(
-                                rating: double.parse(webtoon.webtoonStarRating)/2,
-                                itemBuilder: (context, index) => Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                itemCount: 5,
-                                itemSize: 30.0,
-                                direction: Axis.horizontal,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                            itemCount: 5,
+                            itemSize: 30.0,
+                            direction: Axis.horizontal,
+                          ),
+                          Text("${webtoon.webtoonStarRating}")
+                        ],
+                      ),),
+                    SizedBox(height: 10,),
+                    // 장르
+                    ItemIndicatorString(itemName: "장르", itemValue: "${webtoon.webtoonGenre}",),
+                    SizedBox(height: 10,),
+                    // 이용가
+                    ItemIndicatorString(itemName: "이용가", itemValue: "${webtoon.webtoonAge}",),
+                    SizedBox(height: 10,),
+                    SizedBox(height: 10,),
+                    SizedBox(height: 10,),
                     // 줄거리
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: getPadding(
-                          left: 22,
-                          top: 27,
-                          right: 22,
-                        ),
-                        child: Text(
-                          "lbl28".tr,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                          style: AppStyle.txtInterExtraLight25.copyWith(),
-                        ),
-                      ),
-                    ),
+                    ItemIndicatorString(itemName: "줄거리", itemValue: "",),
                     // 줄거리 내용
                     Align(
                       alignment: Alignment.center,
@@ -278,7 +200,6 @@ class DetailScreen extends GetWidget<DetailController> {
                         ),
                         margin: getMargin(
                           left: 13,
-                          top: 16,
                           right: 13,
                         ),
                         child: Text(

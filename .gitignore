@@ -10,3 +10,4 @@
 /.packages
 /.flutter-plugins-dependencies
 /.flutter-plugins
+/lib/core/constants/constants.dart

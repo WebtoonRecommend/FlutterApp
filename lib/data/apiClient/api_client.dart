@@ -16,6 +16,9 @@ class ApiClient {
 
   var userid = "";
   var token = "";
+  var passwd = "";
+  // TODO: 추천만료
+  var days = "0";
 
   setUserid(String userid) {
     this.userid = userid;
@@ -23,8 +26,15 @@ class ApiClient {
   setToken(String token) {
     this.token = token;
   }
+  setPasswd(String passwd){
+    this.passwd = passwd;
+  }
 
-
+  printResponse(var response){
+    print(response.request);
+    print(response.statusCode);
+    print(response.body);
+  }
 
 
   // api 결과값에 개행문자 붙여서 나옴
@@ -43,7 +53,7 @@ class ApiClient {
         headers: {"Content-Type": "application/json"},
         body: body
     );
-    print("${response.body}");
+    printResponse(response);
     // api 결과값을 그대로 반환
     return response.body.substring(0,response.body.length-1);
   }
@@ -60,16 +70,15 @@ class ApiClient {
       return userFromJson(jasonData);
     }
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return null;
     }
   }
 
-  /// Recommended/userid get api
-  Future<List<Recommend>?> getRecommendedwithUserid() async {
+  /// Recommended get api
+  Future<List<Recommend>?> getRecommended() async {
     var response = await client.get(
-      Uri.parse("${baseUrl}/Recommended/${userid}"),
+      Uri.parse("${baseUrl}/Recommended/${days}"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
@@ -78,8 +87,7 @@ class ApiClient {
       return recommendFromJson(jasonData);
     }
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return null;
     }
   }
@@ -99,16 +107,15 @@ class ApiClient {
       return webtoonData;
     }
     else {
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return null;
     }
   }
 
-  /// BookMark/userid get api
-  Future<List<Bookmark>?> getBookMarkwithUserid() async{
+  /// BookMark get api
+  Future<List<Bookmark>?> getBookMark() async{
     var response = await client.get(
-      Uri.parse("${baseUrl}/BookMark/${userid}"),
+      Uri.parse("${baseUrl}/BookMark"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
@@ -117,23 +124,21 @@ class ApiClient {
       return bookmarkFromJson(jsonData);
     }
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return null;
     }
   }
 
-  /// BookMark/userid/webtoon delete api
-  Future<bool> deleteBookMarkwithUseridandTitle(String webtoon) async {
+  /// BookMark/webtoon delete api
+  Future<bool> deleteBookMarkwithTitle(String webtoon) async {
     var response = await client.delete(
-      Uri.parse("${baseUrl}/BookMark/${userid}/${webtoon}"),
+      Uri.parse("${baseUrl}/BookMark/${webtoon}"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
     if (response.statusCode == 200) return true;
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return false;
     }
   }
@@ -153,8 +158,7 @@ class ApiClient {
     );
     if (response.statusCode == 200) return true;
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return false;
     }
   }
@@ -175,9 +179,8 @@ class ApiClient {
       return webtoonListData;
     }
     else{
-      print("${response.statusCode}");
-      print("${response.body}");
-      print("$searchText");
+      print("검색어: $searchText");
+      printResponse(response);
       return null;
     }
   }
@@ -195,8 +198,7 @@ class ApiClient {
     if (response.statusCode == 200)
       return true;
     else {
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return false;
     }
   }
@@ -215,8 +217,7 @@ class ApiClient {
     if (response.statusCode == 200)
       return true;
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return false;
     }
   }

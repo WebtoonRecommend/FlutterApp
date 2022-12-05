@@ -23,8 +23,8 @@ class SearchController extends GetxController {
 
   /// text를 검색하여 나온 웹툰을 등록
   updateSearchList() async {
-    this.searchList.value.clear();
-    this.searches.value.clear();
+    this.searchList.clear();
+    this.searches.clear();
     await _loadSearchList();
   }
 

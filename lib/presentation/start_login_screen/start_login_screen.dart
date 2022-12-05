@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:application4/data/controllers/user_controller.dart';
 
 import 'package:application4/theme/palette.dart';
@@ -16,7 +14,6 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
   String userName = '';
   String userEmail = '';
   String userPassword = '';
-  File? userPickedImage;
 
 
   @override
@@ -133,11 +130,7 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                                  * passwd가 7자 이상인지 판단
                                                  * ID와 passwd가 일치하는지 판단
                                                  * */
-                                                if (value!.isEmpty ||
-                                                    value.length < 6) {
-                                                  return 'Password must be at least 7 characters long.';
-                                                }
-                                                return null;
+                                                return idValidator(value);
                                               },
                                               onSaved: (value) {
                                                 userPassword = value!;
@@ -301,6 +294,14 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                         ))),
               ),
             )));
+  }
+
+  idValidator(var value){
+    if (value!.isEmpty ||
+        value.length < 6) {
+      return 'Password must be at least 7 characters long.';
+    }
+    return null;
   }
 
   onTapBtnLogin() {
