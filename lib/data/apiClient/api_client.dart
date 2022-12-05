@@ -24,7 +24,11 @@ class ApiClient {
     this.token = token;
   }
 
-
+  printResponse(var response){
+    print(response.request);
+    print(response.statusCode);
+    print(response.body);
+  }
 
 
   // api 결과값에 개행문자 붙여서 나옴
@@ -43,7 +47,7 @@ class ApiClient {
         headers: {"Content-Type": "application/json"},
         body: body
     );
-    print("${response.body}");
+    printResponse(response);
     // api 결과값을 그대로 반환
     return response.body.substring(0,response.body.length-1);
   }
@@ -60,8 +64,7 @@ class ApiClient {
       return userFromJson(jasonData);
     }
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return null;
     }
   }
@@ -69,7 +72,7 @@ class ApiClient {
   /// Recommended/userid get api
   Future<List<Recommend>?> getRecommendedwithUserid() async {
     var response = await client.get(
-      Uri.parse("${baseUrl}/Recommended/${userid}"),
+      Uri.parse("${baseUrl}/Recommended/${days}"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
@@ -78,8 +81,7 @@ class ApiClient {
       return recommendFromJson(jasonData);
     }
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return null;
     }
   }
@@ -99,8 +101,7 @@ class ApiClient {
       return webtoonData;
     }
     else {
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return null;
     }
   }
@@ -108,7 +109,7 @@ class ApiClient {
   /// BookMark/userid get api
   Future<List<Bookmark>?> getBookMarkwithUserid() async{
     var response = await client.get(
-      Uri.parse("${baseUrl}/BookMark/${userid}"),
+      Uri.parse("${baseUrl}/BookMark"),
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
@@ -117,8 +118,7 @@ class ApiClient {
       return bookmarkFromJson(jsonData);
     }
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return null;
     }
   }
@@ -132,8 +132,7 @@ class ApiClient {
     );
     if (response.statusCode == 200) return true;
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return false;
     }
   }
@@ -153,8 +152,7 @@ class ApiClient {
     );
     if (response.statusCode == 200) return true;
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return false;
     }
   }
@@ -175,9 +173,8 @@ class ApiClient {
       return webtoonListData;
     }
     else{
-      print("${response.statusCode}");
-      print("${response.body}");
-      print("$searchText");
+      print("검색어: $searchText");
+      printResponse(response);
       return null;
     }
   }
@@ -195,8 +192,7 @@ class ApiClient {
     if (response.statusCode == 200)
       return true;
     else {
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return false;
     }
   }
@@ -215,8 +211,7 @@ class ApiClient {
     if (response.statusCode == 200)
       return true;
     else{
-      print(response.statusCode);
-      print(response.body);
+      printResponse(response);
       return false;
     }
   }
