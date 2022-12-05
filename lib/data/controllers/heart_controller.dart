@@ -57,6 +57,9 @@ class HeartController extends GetxController{
 
   /// bookmark 추가
   void heartToWebtoon(String webtoon) async{
+    if (webtoon=="" || webtoon==" "){
+      print("failed to post ${webtoon} on bookmark.\n");
+    }
     var isposted = await myRepository.postWebtoonFromBookmark(webtoon);
     if (isposted) {
       hearts.add(webtoon);
