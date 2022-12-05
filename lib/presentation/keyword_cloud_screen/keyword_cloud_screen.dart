@@ -63,7 +63,7 @@ class KeywordCloudScreen extends GetWidget<KeywordCloudController> {
                           Scatter(
                             fillGaps: false,
                             delegate: ArchimedeanSpiralScatterDelegate(ratio: ratio,a: 5, b: 30),
-                            children: widgets.sublist(7,13),
+                            children: widgets.sublist(7,14),
                           ),
                           // Scatter(
                           //   fillGaps: false,
