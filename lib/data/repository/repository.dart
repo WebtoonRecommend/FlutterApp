@@ -44,7 +44,7 @@ class Repository {
 
   /// get recommend list with jwt
   Future<List<Recommend>?> fetchRecommend() async {
-    return apiClient.getRecommendedwithUserid();
+    return apiClient.getRecommended();
   }
 
   /// get webtoon with jwt
@@ -61,12 +61,12 @@ class Repository {
 
   /// get bookmark list with jwt
   Future<List<Bookmark>?> fetchBookmark() async{
-    return apiClient.getBookMarkwithUserid();
+    return apiClient.getBookMark();
   }
 
   /// bookmark delete api
   Future<bool> deleteWebtoonFromBookmark(String webtoon) async {
-    return apiClient.deleteBookMarkwithUseridandTitle(webtoon);
+    return apiClient.deleteBookMarkwithTitle(webtoon);
   }
 
   /// bookmark post api
