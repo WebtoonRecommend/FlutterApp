@@ -29,6 +29,9 @@ class ApiClient {
   setPasswd(String passwd){
     this.passwd = passwd;
   }
+  setDays(String days){
+    this.days = days;
+  }
 
   printResponse(var response){
     print(response.request);

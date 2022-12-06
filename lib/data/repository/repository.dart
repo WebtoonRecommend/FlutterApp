@@ -38,7 +38,39 @@ class Repository {
     apiClient.setToken(token);
   }
 
-
+  /// days 계산 및 등록 함수
+  setDays(){
+    // db에서 refresh_time을 가져와 last에 저장
+    bool isExist = false;
+    var last;
+    for (final element in expiration){
+      if (element.name == userid){
+        last = element.refresh_time;
+        isExist = true;
+        break;
+      }
+    }
+    // id refresh_time 기록이 없으면 계산할 수 없으므로 0으로 둔다
+    if (!isExist){
+      apiClient.setDays("0");
+    }
+    else {
+      // 현재 시각과 비교한 차를 diff에 저장
+      var now = DateTime.now().toUtc();
+      last = DateTime.parse("${last}Z");
+      var diff = now.difference(last).inMinutes;
+      print("$now, $last, $diff");
+      // 일정 시간이 지났다면 days를 증가시킨다.
+      if (diff>=1){
+        apiClient.setDays("${diff}");
+      }
+      // 아니면 냅둠
+      else{
+        apiClient.setDays("0");
+      }
+      // apiClient.setDays("${now.difference(last).inMinutes}");
+    }
+  }
 
   /// 앱 local db를 가져옴
   fetchLocalDatabase() async {
