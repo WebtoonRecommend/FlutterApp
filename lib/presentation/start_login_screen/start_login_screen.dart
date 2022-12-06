@@ -14,11 +14,11 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
   String userName = '';
   String userEmail = '';
   String userPassword = '';
+  final userController = Get.put(UserController(), permanent: true);
 
 
   @override
   Widget build(BuildContext context) {
-    final userController = Get.put(UserController(), permanent: true);
     return SafeArea(
         child: Scaffold(
             backgroundColor: ColorConstant.whiteA700,
@@ -275,6 +275,8 @@ class StartLoginScreen extends GetWidget<StartLoginController> {
                                               // id,pw찾기 버튼
                                               ElevatedButton(
                                                   onPressed: () {
+                                                    // db 스키마 초기화용(디버깅용)
+                                                    userController.myRepository.deleteTableLocalDatabase();
                                                     showToast(
                                                         'service not yet supported');
                                                   },

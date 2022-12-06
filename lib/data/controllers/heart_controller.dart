@@ -47,7 +47,10 @@ class HeartController extends GetxController{
   void breakHeartToWebtoon(String webtoon) async{
     var isdeleted = await myRepository.deleteWebtoonFromBookmark(webtoon);
     if (isdeleted) {
+      // 즐겨찾기 제거
       hearts.remove(webtoon);
+      // 타임스탬프 갱신
+      await myRepository.updateRefreshDateLocalDatabase();
       print("${webtoon} is deleted from BookMark.\n");
     }
     else{
@@ -62,7 +65,10 @@ class HeartController extends GetxController{
     }
     var isposted = await myRepository.postWebtoonFromBookmark(webtoon);
     if (isposted) {
+      // 즐겨찾기 추가
       hearts.add(webtoon);
+      // 타임스탬프 갱신
+      await myRepository.updateRefreshDateLocalDatabase();
       print("${webtoon} is posted on BookMark.\n");
     }
     else {

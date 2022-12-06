@@ -29,6 +29,9 @@ class ApiClient {
   setPasswd(String passwd){
     this.passwd = passwd;
   }
+  setDays(String days){
+    this.days = days;
+  }
 
   printResponse(var response){
     print(response.request);
@@ -65,12 +68,12 @@ class ApiClient {
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
+    printResponse(response);
     if(response.statusCode == 200){
       var jasonData = response.body;
       return userFromJson(jasonData);
     }
     else{
-      printResponse(response);
       return null;
     }
   }
@@ -82,12 +85,13 @@ class ApiClient {
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
+    printResponse(response);
+
     if(response.statusCode == 200){
       var jasonData = response.body;
       return recommendFromJson(jasonData);
     }
     else{
-      printResponse(response);
       return null;
     }
   }
@@ -99,6 +103,7 @@ class ApiClient {
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
+    printResponse(response);
 
     if(response.statusCode == 200){
       var jsonData = response.body;
@@ -107,7 +112,6 @@ class ApiClient {
       return webtoonData;
     }
     else {
-      printResponse(response);
       return null;
     }
   }
@@ -119,12 +123,12 @@ class ApiClient {
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
+    printResponse(response);
     if(response.statusCode == 200){
       var jsonData = response.body;
       return bookmarkFromJson(jsonData);
     }
     else{
-      printResponse(response);
       return null;
     }
   }
@@ -136,9 +140,9 @@ class ApiClient {
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
+    printResponse(response);
     if (response.statusCode == 200) return true;
     else{
-      printResponse(response);
       return false;
     }
   }
@@ -156,9 +160,9 @@ class ApiClient {
           "authorization":"Bearer ${token}"},
         body: body
     );
+    printResponse(response);
     if (response.statusCode == 200) return true;
     else{
-      printResponse(response);
       return false;
     }
   }
@@ -171,6 +175,8 @@ class ApiClient {
       headers: {"Content-Type": "application/json",
         "authorization":"Bearer ${token}"},
     );
+    print("검색어: $searchText");
+    printResponse(response);
     if(response.statusCode == 200){
       var jsonData = response.body;
       var webtoonListData = await webtoonFromJsonList(jsonData);
@@ -179,8 +185,6 @@ class ApiClient {
       return webtoonListData;
     }
     else{
-      print("검색어: $searchText");
-      printResponse(response);
       return null;
     }
   }
@@ -195,10 +199,10 @@ class ApiClient {
         headers: {"Content-Type": "application/json"},
         body: body
     );
+    printResponse(response);
     if (response.statusCode == 200)
       return true;
     else {
-      printResponse(response);
       return false;
     }
   }
@@ -214,10 +218,10 @@ class ApiClient {
           "authorization":"Bearer ${token}"},
         body: body
     );
+    printResponse(response);
     if (response.statusCode == 200)
       return true;
     else{
-      printResponse(response);
       return false;
     }
   }
