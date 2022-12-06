@@ -39,8 +39,22 @@ class UserController extends GetxController {
     if (loginStatus == "2") return 2;
     else if (loginStatus == "1") return 1;
     else {
-      // id, pw 일치하면 token 저장
+      // 로그인 성공
+      // id, pw 일치하면 token 저장(loginStatus가 jwt토큰임)
       setToken(loginStatus.substring(1,loginStatus.length-1));
+
+      // login 로그 기록
+      bool isAlreadyExist = false;
+      for (final element in myRepository.expiration){
+        if (element.name == userName){
+          isAlreadyExist = true;
+          break;
+        }
+      }
+      if (!isAlreadyExist){
+        await myRepository.postLocalDatabase();
+      }
+
       //서버에서 userid로 검색후 유저정보 가져옴
       var userTmp = await myRepository.fetchUserData();
       if (userTmp != null) {
