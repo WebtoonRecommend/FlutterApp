@@ -9,6 +9,8 @@ import 'package:application4/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class AppSettingScreen extends GetWidget<AppSettingController> {
+  Repository myRepository = Get.find<Repository>();
+
   @override
   Widget build(BuildContext context) {
     // AppSettingController controller = Get.put(AppSettingController(), permanent: true); // Instantiate Get Controller, *in* build()
@@ -76,7 +78,81 @@ class AppSettingScreen extends GetWidget<AppSettingController> {
                       color: Colors.black
                     ),),
                   ),
-                )
+                ),
+                // delete log 버튼
+                Center(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)
+                        )
+                    ),
+                    onPressed: () {
+                      onTapBtnDeleteLog();
+                    },
+                    child: Text("Delete log", style: TextStyle(
+                        fontSize: 16,
+                        letterSpacing: 2.2,
+                        color: Colors.black
+                    ),),
+                  ),
+                ),
+                // delete db 버튼
+                Center(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)
+                        )
+                    ),
+                    onPressed: () {
+                      onTapBtnDeleteDB();
+                    },
+                    child: Text("Delete DB", style: TextStyle(
+                        fontSize: 16,
+                        letterSpacing: 2.2,
+                        color: Colors.red
+                    ),),
+                  ),
+                ),
+                // 디버깅용 database 목록
+                Obx(()=> Container(
+                        width: size.width,
+                        height: 550,
+                        child: ListView.builder(
+                            itemCount: myRepository.expiration.length,
+                            itemBuilder: (context, index) {
+                              // 순서대로 timestamp, pk, 아이디
+                              return Text(
+                                "${myRepository.expiration[index].refresh_time}    ${myRepository.expiration[index].id} ${myRepository.expiration[index].name}",
+                               );
+                            }),
+                      ),
+                ),
+                // Offstage(
+                //   // obx 함수가 Rx variable in the root scope of the callback의 변화만 탐지하기 때문에 새로 만들어줌
+                //   offstage: true,
+                //   child: SingleChildScrollView(
+                //     child: Container(
+                //       width: size.width,
+                //       height: 150,
+                //       child: ListView.builder(
+                //           itemCount: ,
+                //           itemBuilder: (context, index) {
+                //             await DatabaseHelper.instance.getGroceries();
+                //             return Text(
+                //               "${[index]}",
+                //               style: TextStyle(
+                //                   fontSize: 25, color: Colors.green),
+                //             );
+                //           }),
+                //     ),
+                //   ),
+                // ),SingleChildScrollView(
+                    SizedBox(height: 40,),
+
               ]
             )
         ),
@@ -94,6 +170,16 @@ class AppSettingScreen extends GetWidget<AppSettingController> {
 
 
     Get.offAllNamed(AppRoutes.startLoginScreen);
+  }
+
+  /// 데이터베이스의 모든 row를 삭제한다.
+  onTapBtnDeleteLog(){
+    myRepository.deleteLocalDatabase();
+  }
+
+  /// 데이터베이스 테이블을 삭제한다.
+  onTapBtnDeleteDB(){
+    myRepository.deleteTableLocalDatabase();
   }
   //
   // Padding buildNotificationOption(AppSettingController controller, String title, RxBool value,
