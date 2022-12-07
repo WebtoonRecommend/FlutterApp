@@ -15,7 +15,7 @@ class Recommend {
 
   /// json to Recommend class 함수
   factory Recommend.fromJson(List<dynamic> json) => Recommend(
-    star: json[0],
+    star: json[0].toString(),
     webtoonTitle: json[1],
   );
 
