@@ -8,11 +8,16 @@ import 'package:application4/data/models/bookmark.dart';
 import 'package:application4/data/models/recommend.dart';
 import 'package:application4/data/models/webtoon.dart';
 
+import '../controllers/user_controller.dart';
+
 
 /// api 통신 담당자
 class ApiClient {
   static var client = http.Client();
   static const baseUrl = Constants.baseUrl;
+  final userController = Get.find<UserController>();
+
+
 
   var userid = "";
   var token = "";
@@ -73,6 +78,10 @@ class ApiClient {
       var jasonData = response.body;
       return userFromJson(jasonData);
     }
+    else if(response.statusCode == 401){
+      userController.updateUser(userid, passwd);
+      return null;
+    }
     else{
       return null;
     }
@@ -90,6 +99,10 @@ class ApiClient {
     if(response.statusCode == 200){
       var jasonData = response.body;
       return recommendFromJson(jasonData);
+    }
+    else if(response.statusCode == 401){
+      userController.updateUser(userid, passwd);
+      return null;
     }
     else{
       return null;
@@ -111,6 +124,10 @@ class ApiClient {
 
       return webtoonData;
     }
+    else if(response.statusCode == 401){
+      userController.updateUser(userid, passwd);
+      return null;
+    }
     else {
       return null;
     }
@@ -128,6 +145,10 @@ class ApiClient {
       var jsonData = response.body;
       return bookmarkFromJson(jsonData);
     }
+    else if(response.statusCode == 401){
+      userController.updateUser(userid, passwd);
+      return null;
+    }
     else{
       return null;
     }
@@ -141,7 +162,13 @@ class ApiClient {
         "authorization":"Bearer ${token}"},
     );
     printResponse(response);
-    if (response.statusCode == 200) return true;
+    if (response.statusCode == 200) {
+      return true;
+    }
+    else if(response.statusCode == 401){
+      userController.updateUser(userid, passwd);
+      return false;
+    }
     else{
       return false;
     }
@@ -162,6 +189,10 @@ class ApiClient {
     );
     printResponse(response);
     if (response.statusCode == 200) return true;
+    else if(response.statusCode == 401){
+      userController.updateUser(userid, passwd);
+      return false;
+    }
     else{
       return false;
     }
@@ -183,6 +214,10 @@ class ApiClient {
 
       print(webtoonListData);
       return webtoonListData;
+    }
+    else if(response.statusCode == 401){
+      userController.updateUser(userid, passwd);
+      return null;
     }
     else{
       return null;
@@ -221,6 +256,10 @@ class ApiClient {
     printResponse(response);
     if (response.statusCode == 200)
       return true;
+    else if(response.statusCode == 401){
+      userController.updateUser(userid, passwd);
+      return null;
+    }
     else{
       return false;
     }

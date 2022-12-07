@@ -9,10 +9,12 @@ class UserController extends GetxController {
   Repository myRepository = Get.find<Repository>();
 
   ///userid 등록 함수
-  setID(var userid) {
+  setIDPW(var userid, var userpasswd) {
     this.userid = userid;
     this.user.ID = userid;
+    this.user.passwd = userpasswd;
     myRepository.setUserid(userid);
+    myRepository.setpasswd(userpasswd);
   }
 
   /// token 등록 함수
@@ -33,16 +35,16 @@ class UserController extends GetxController {
    */
   Future<int> updateUser(String userName, String userPassword) async {
 
-    setID(userName);
+    setIDPW(userName,userPassword);
     var loginStatus = await _isMatch(userPassword);
-
+    print("${userName} ${userPassword} => loginstatus: ${loginStatus}");
     if (loginStatus == "2") return 2;
     else if (loginStatus == "1") return 1;
     else {
       // 로그인 성공
       // id, pw 일치하면 token 저장(loginStatus가 jwt토큰임)
       setToken(loginStatus.substring(1,loginStatus.length-1));
-
+      print(loginStatus);
       // login 로그 기록
       bool isAlreadyExist = false;
       for (final element in myRepository.expiration){

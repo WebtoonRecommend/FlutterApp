@@ -16,6 +16,7 @@ class Repository {
 
   // userid 및 token
   var userid = "";
+  var passwd = "";
   var token = "";
   // webtoon을 저장하는 map이다. key: String, value: Webtoon
   var webtoonList= Map<String, Webtoon>();
@@ -31,6 +32,11 @@ class Repository {
   setUserid(String userid) {
     this.userid = userid;
     apiClient.setUserid(userid);
+  }
+  /// userpasswd 등록 함수
+  setpasswd(String passwd) {
+    this.passwd = passwd;
+    apiClient.setPasswd(passwd);
   }
   /// token 등록 함수
   setToken(String token) {
