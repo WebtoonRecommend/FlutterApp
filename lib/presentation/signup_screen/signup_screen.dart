@@ -349,7 +349,7 @@ class SignupScreen extends GetWidget<SignupController> {
                                           showToast('Please enter at least 4 characters');
                                         }
                                         else{
-                                          signupController.setID(userName);
+                                          signupController.setIDPW(userName, userPassword);
                                           await signupController.isDuplication();
                                         }
                                       },
@@ -481,7 +481,7 @@ class SignupScreen extends GetWidget<SignupController> {
                                 signupController.userpasswd = userPassword;
                                 bool isusercreated = await signupController.postUserData();
                                 if (isusercreated) {
-                                  signupController.setID(userName);
+                                  signupController.setIDPW(userName, userPassword);
                                   bool isidExist = await signupController.userController.isIdExist("");
                                   if (isidExist) {
                                     onTapBtnSignup();

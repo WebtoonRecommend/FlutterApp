@@ -53,9 +53,10 @@ class SignupController extends GetxController {
   }
 
   /// userid 등록 함수
-  setID(var userid) {
+  setIDPW(var userid, var userpasswd) {
     this.userid = userid;
-    this.userController.setID(userid);
+    this.userpasswd = userpasswd;
+    this.userController.setIDPW(userid,userpasswd);
   }
 
   /// 회원가입 정보를 서버에 등록하는 함수

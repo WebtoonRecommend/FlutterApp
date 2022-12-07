@@ -9,6 +9,7 @@ String userToJson(User data) => json.encode(data.toJson());
 class User {
   User({
     required this.ID,
+    this.passwd,
     this.age,
     this.job,
     this.sex,
@@ -16,6 +17,7 @@ class User {
   });
 
   String ID;
+  dynamic passwd;
   dynamic age;
   dynamic job;
   dynamic sex;
