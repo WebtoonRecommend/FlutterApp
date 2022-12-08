@@ -10,10 +10,12 @@ import 'package:flutter/material.dart';
 
 class AppSettingScreen extends GetWidget<AppSettingController> {
   Repository myRepository = Get.find<Repository>();
+  final userController = Get.find<UserController>();
+  final heartController = Get.find<HeartController>();
 
   @override
   Widget build(BuildContext context) {
-    // AppSettingController controller = Get.put(AppSettingController(), permanent: true); // Instantiate Get Controller, *in* build()
+    AppSettingController appSettingController = Get.put(AppSettingController(), permanent: true); // Instantiate Get Controller, *in* build()
 
     return SafeArea(
       child: Scaffold(
@@ -60,6 +62,195 @@ class AppSettingScreen extends GetWidget<AppSettingController> {
                 // buildNotificationOption(controller,"Oppertunity", controller.on3, controller.toggle3),
                 // Obx will rebuild Text & Switch when "on" observable changes
 
+
+                // 유저정보
+                Padding(
+                  padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'NAME',
+                        style: TextStyle(
+                          color: Colors.black,
+                          letterSpacing: 2.0,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        '${userController.user.ID}',
+                        style: TextStyle(
+                            color: Colors.black,
+                            letterSpacing: 2.0,
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Column(
+                              children: [
+                                Text(
+                                  '성별',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    letterSpacing: 2.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Text(
+                                  (userController.user.sex==0) ?
+                                  '남성' : "여성",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      letterSpacing: 2.0,
+                                      fontSize: 28.0,),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: Column(
+                              children: [
+                                Text(
+                                  '나이',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    letterSpacing: 2.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Text(
+                                  '${(userController.user.age+1)*10}대',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      letterSpacing: 2.0,
+                                      fontSize: 28.0,),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: Column(
+                              children: [
+                                Text(
+                                  '직업',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    letterSpacing: 2.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Text(
+                                  (userController.user.job==0)?
+                                  "학생" : (userController.user.job==1)?
+                                  "직장인" : "프리랜서",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      letterSpacing: 2.0,
+                                      fontSize: 28.0,),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+
+                      //
+                      // SizedBox(
+                      //   height: 30.0,
+                      // ),
+                      // Row(
+                      //   children: <Widget>[
+                      //     Icon(Icons.check_circle_outline),
+                      //     Text(
+                      //       'using dual-blade',
+                      //       style: TextStyle(fontSize: 16.0, letterSpacing: 1.0),
+                      //     ),
+                      //   ],
+                      // ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        'KEYWORDS',
+                        style: TextStyle(
+                          color: Colors.black,
+                          letterSpacing: 2.0,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Obx(()=> ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: myRepository.keywordList.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              // 즐겨찾기 웹툰 목록들
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: <Widget>[
+                                      Icon(Icons.check_circle_outline),
+                                      Text(
+                                        '${myRepository.keywordList[index].word}',
+                                        style: TextStyle(fontSize: 16.0, letterSpacing: 1.0),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                      ),
+                      // Row(
+                      //   children: <Widget>[
+                      //     Icon(Icons.check_circle_outline),
+                      //     Text(
+                      //       'face hero tatoo',
+                      //       style: TextStyle(fontSize: 16.0, letterSpacing: 1.0),
+                      //     ),
+                      //   ],
+                      // ),
+                      // SizedBox(
+                      //   height: 10.0,
+                      // ),
+                      // Row(
+                      //   children: <Widget>[
+                      //     Icon(Icons.check_circle_outline),
+                      //     Text(
+                      //       'fire flames',
+                      //       style: TextStyle(fontSize: 16.0, letterSpacing: 1.0),
+                      //     ),
+                      //   ],
+                      // ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 60.0,
+                  color: Colors.grey[850],
+                  thickness: 0.5,
+                  endIndent: 30.0,
+                ),
                 // logout 버튼
                 Center(
                   child: OutlinedButton(

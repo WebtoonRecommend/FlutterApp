@@ -9,13 +9,13 @@ import 'package:application4/data/models/recommend.dart';
 import 'package:application4/data/models/webtoon.dart';
 
 import '../controllers/user_controller.dart';
+import '../models/keyword.dart';
 
 
 /// api 통신 담당자
 class ApiClient {
   static var client = http.Client();
   static const baseUrl = Constants.baseUrl;
-  final userController = Get.find<UserController>();
 
 
 
@@ -42,6 +42,14 @@ class ApiClient {
     print(response.request);
     print(response.statusCode);
     print(response.body);
+  }
+
+  checkAuth(var response){
+    final userController = Get.find<UserController>();
+
+    if(response.statusCode == 401){
+      userController.updateUser(userid, passwd);
+    }
   }
 
 
@@ -74,13 +82,11 @@ class ApiClient {
         "authorization":"Bearer ${token}"},
     );
     printResponse(response);
+    checkAuth(response);
+
     if(response.statusCode == 200){
       var jasonData = response.body;
       return userFromJson(jasonData);
-    }
-    else if(response.statusCode == 401){
-      userController.updateUser(userid, passwd);
-      return null;
     }
     else{
       return null;
@@ -95,14 +101,11 @@ class ApiClient {
         "authorization":"Bearer ${token}"},
     );
     printResponse(response);
+    checkAuth(response);
 
     if(response.statusCode == 200){
       var jasonData = response.body;
       return recommendFromJson(jasonData);
-    }
-    else if(response.statusCode == 401){
-      userController.updateUser(userid, passwd);
-      return null;
     }
     else{
       return null;
@@ -117,16 +120,12 @@ class ApiClient {
         "authorization":"Bearer ${token}"},
     );
     printResponse(response);
+    checkAuth(response);
 
     if(response.statusCode == 200){
       var jsonData = response.body;
       var webtoonData = webtoonFromJson(jsonData);
-
       return webtoonData;
-    }
-    else if(response.statusCode == 401){
-      userController.updateUser(userid, passwd);
-      return null;
     }
     else {
       return null;
@@ -141,13 +140,11 @@ class ApiClient {
         "authorization":"Bearer ${token}"},
     );
     printResponse(response);
+    checkAuth(response);
+
     if(response.statusCode == 200){
       var jsonData = response.body;
       return bookmarkFromJson(jsonData);
-    }
-    else if(response.statusCode == 401){
-      userController.updateUser(userid, passwd);
-      return null;
     }
     else{
       return null;
@@ -162,12 +159,10 @@ class ApiClient {
         "authorization":"Bearer ${token}"},
     );
     printResponse(response);
+    checkAuth(response);
+
     if (response.statusCode == 200) {
       return true;
-    }
-    else if(response.statusCode == 401){
-      userController.updateUser(userid, passwd);
-      return false;
     }
     else{
       return false;
@@ -188,10 +183,10 @@ class ApiClient {
         body: body
     );
     printResponse(response);
-    if (response.statusCode == 200) return true;
-    else if(response.statusCode == 401){
-      userController.updateUser(userid, passwd);
-      return false;
+    checkAuth(response);
+
+    if (response.statusCode == 200) {
+      return true;
     }
     else{
       return false;
@@ -208,16 +203,13 @@ class ApiClient {
     );
     print("검색어: $searchText");
     printResponse(response);
+    checkAuth(response);
+
     if(response.statusCode == 200){
       var jsonData = response.body;
       var webtoonListData = await webtoonFromJsonList(jsonData);
-
       print(webtoonListData);
       return webtoonListData;
-    }
-    else if(response.statusCode == 401){
-      userController.updateUser(userid, passwd);
-      return null;
     }
     else{
       return null;
@@ -235,13 +227,37 @@ class ApiClient {
         body: body
     );
     printResponse(response);
-    if (response.statusCode == 200)
+    checkAuth(response);
+
+    if (response.statusCode == 200) {
       return true;
+    }
     else {
       return false;
     }
   }
 
+
+  /// KeyWords get api
+  Future<List<Keyword>?> getKeyWords() async{
+    final response = await client.get(
+        Uri.parse("${baseUrl}/KeyWords"),
+        headers: {"Content-Type": "application/json",
+          "authorization":"Bearer ${token}"},
+    );
+    printResponse(response);
+    checkAuth(response);
+
+    if(response.statusCode == 200){
+      var jsonData = response.body;
+      var keywordListData = await keywordFromJson(jsonData);
+      print(keywordListData);
+      return keywordListData;
+    }
+    else{
+      return null;
+    }
+  }
 
   /// KeyWords post api
   postKeyWords(var data) async{
@@ -254,11 +270,10 @@ class ApiClient {
         body: body
     );
     printResponse(response);
-    if (response.statusCode == 200)
+    checkAuth(response);
+
+    if (response.statusCode == 200) {
       return true;
-    else if(response.statusCode == 401){
-      userController.updateUser(userid, passwd);
-      return null;
     }
     else{
       return false;
