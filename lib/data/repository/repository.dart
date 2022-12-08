@@ -8,6 +8,7 @@ import 'package:application4/data/models/webtoon.dart';
 import 'package:application4/data/apiClient/api_client.dart';
 
 import '../apiClient/db_client.dart';
+import '../models/keyword.dart';
 
 /// instance 저장하는 친구
 class Repository {
@@ -22,6 +23,8 @@ class Repository {
   var webtoonList= Map<String, Webtoon>();
   // 각 id마다 추천 만료를 계산하기 위해 마지막으로 즐겨찾기를 변경한 시간을 기록
   var expiration = RxList<Expiration>();
+  // keyword list
+  var keywordList = RxList<Keyword>();
 
   /// init
   Repository(){
@@ -187,6 +190,16 @@ class Repository {
     return apiClient.postUser(data);
   }
 
+  /// keyword get api
+  fetchKeyword() async{
+    keywordList.clear();
+    var data = await apiClient.getKeyWords();
+    if (data != null) {
+      keywordList.assignAll(data);
+      print(webtoonList);
+    }
+
+  }
 
   /// keyword post api
   postKeyword(var data) async{

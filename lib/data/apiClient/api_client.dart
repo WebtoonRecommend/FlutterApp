@@ -238,6 +238,27 @@ class ApiClient {
   }
 
 
+  /// KeyWords get api
+  Future<List<Keyword>?> getKeyWords() async{
+    final response = await client.get(
+        Uri.parse("${baseUrl}/KeyWords"),
+        headers: {"Content-Type": "application/json",
+          "authorization":"Bearer ${token}"},
+    );
+    printResponse(response);
+    checkAuth(response);
+
+    if(response.statusCode == 200){
+      var jsonData = response.body;
+      var keywordListData = await keywordFromJson(jsonData);
+      print(keywordListData);
+      return keywordListData;
+    }
+    else{
+      return null;
+    }
+  }
+
   /// KeyWords post api
   postKeyWords(var data) async{
     var body = json.encode(data);
