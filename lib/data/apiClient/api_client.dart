@@ -48,6 +48,7 @@ class ApiClient {
     final userController = Get.find<UserController>();
 
     if(response.statusCode == 401){
+      showToast('로그인 만료되었습니다...\n 다시 시도해주세요.');
       userController.updateUser(userid, passwd);
     }
   }
