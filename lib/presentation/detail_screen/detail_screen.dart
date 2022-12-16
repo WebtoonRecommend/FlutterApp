@@ -5,7 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:application4/data/controllers/heart_controller.dart';
 import 'package:application4/presentation/detail_screen/controller/detail_controller.dart';
 import 'package:application4/core/app_export.dart';
-import 'package:application4/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -210,24 +209,18 @@ class DetailScreen extends GetWidget<DetailController> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 70),
                     // 웹툰 사이트 버튼
-                    CustomButton(
+                    InkWell(
                       onTap: (){
                         String site_basUrl = 'https://comic.naver.com';
                         final Uri _url = Uri.parse('${site_basUrl}${webtoon.webtoonLink}');
                         _launchUrl(_url);
                       },
-                      width: 194,
-                      text: "lbl29".tr,
-                      margin: getMargin(
-                        left: 13,
-                        top: 102,
-                        right: 13,
+                      child: SizedBox(
+                        width: size.width-40,
+                        child: Image.asset('assets/images/go_to_naver.png'),
                       ),
-                      variant: ButtonVariant.FillGreen300,
-                      shape: ButtonShape.Square,
-                      fontStyle: ButtonFontStyle.InterExtraLight15,
-                      alignment: Alignment.center,
                     ),
                   ],
                 ),
